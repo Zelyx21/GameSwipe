@@ -1,0 +1,80 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    font-size: 3.5em;
+    color: #8874DF;
+    margin-top: 18px;
+    margin-left: 20px;
+}
+
+.button_bar {
+    position: relative;
+    padding: 10px 20px;
+    border: none;
+    background-color: rgb(39, 1, 67);
+    border-radius: 10px;
+    color: #8874DF;
+    height: auto;
+    width: auto;
+}
+
+.top_bar {
+    display: flex;
+    align-items: center;
+    margin-right: 2%;
+    background-color: #493C60;
+    width: 100%;
+}
+
+.top_bar button:nth-child(2) {
+    font-size: 3ch;
+    font-weight: bold;
+    margin-left: 3%;
+}
+
+.top_bar button:nth-child(3) {
+    font-size: 3ch;
+    font-weight: bold;
+    margin-left: 1%;
+}
+
+.top_bar button:nth-child(4) {
+    margin-left: 11%;
+}
+
+.top_bar button:nth-child(5) {
+    margin-left: 30px;
+}
+
+.top_bar button:nth-child(6) {
+    margin-left: 30px;
+}
+
+.top_bar button:nth-child(7) {
+    font-size: 3ch;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: 30px;
+}
+
+.logo{
+    position: absolute;
+}
+
+.burger_bar{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+
+.burger {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
