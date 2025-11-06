@@ -6,14 +6,22 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="logo/favori.svg" type="image/svg">
     <title>GameSwipe</title>
+
+    <style>
+        a{
+            color: inherit;
+            text-decoration: none;
+        }
+    </style>
+
 </head>
 <body>
     <header>
         <div class="top_bar">
-            <h1>GameSwipe</h1>
+            <button class="gameswipe"><a href="accueil.php">GameSwipe</a></button>
             
-            <button class="button_bar">S'inscrire</button>
-            <button class="button_bar">Se connecter</button>
+            <button class="button_bar"><a href="inscription.html">S'inscrire</a></button>
+            <button class="button_bar"><a href="connecter.html">Se connecter</a></button>
 
             <button class="button_bar"><img src="logo/favori.svg" alt="favori"></button>
             <button class="button_bar"><img src="logo/like.svg" alt="like"></button>
