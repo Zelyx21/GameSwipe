@@ -3,27 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carte Test</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style_accueil_carte.css">
+    <link rel="shortcut icon" href="logo/favori.svg" type="image/svg">
+    <title>GameSwipe</title>
+
+    <style>
+        a{
+            color: inherit;
+            text-decoration: none;
+        }
+    </style>
+
 </head>
 <body>
+    <header>
+        <div class="top_bar">
+            <button class="gameswipe"><a href="accueil.php">GameSwipe</a></button>
+            
+            <button class="button_bar"><a href="inscription.html">S'inscrire</a></button>
+            <button class="button_bar"><a href="connecter.html">Se connecter</a></button>
+
+            <button class="button_bar"><img src="logo/favori.svg" alt="favori"></button>
+            <button class="button_bar"><img src="logo/like.svg" alt="like"></button>
+            <button class="button_bar">
+                <img src="logo/like.svg" alt="like">
+                <img class="logo" src="logo/dislike.svg" alt="dislike">
+            </button>
+
+            <button class="button_bar">Filtres</button>
+        </div>
+    </header>
+    <div class="burger_bar">
+            <button class="burger"><img src="logo/burger_menu.svg" alt="berger menu"></button>
+    </div>
     <div class="card-container">
         <div class="flip-card">
             <div class="flip-card-inner">
                 <!-- Recto -->
                 <!-- Recto -->
 				<div class="card card-front">
+	
 					<div class="card-top">
 						<h2>Stardew Valley</h2>
 						<img src="https://imgs.search.brave.com/RVDwqH_TNlS133VagpLCwC7h8wDDrWexs4q0Iidz2uQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvZmVhdHVy/ZWQvc3RhcmRldy12/YWxsZXktbHR1eW5x/cGpiN2M5NWZmcS5q/cGc" alt="Image de la carte">
 					</div>
-
-					<!-- Bouton étoile sur le recto -->
-					<button class="star-button" onclick="starClicked()">★</button>
-
 					<div class="card-middle">
 						<p>Stardew Valley est un jeu vidéo de type RPG de vie à la campagne à fin ouverte, dans lequel le joueur incarne une personne ayant hérité de la ferme de son grand-père dans Pélican Ville, située dans la vallée "Stardew Valley"</p>
 					</div>
+					
+					<!-- Bouton étoile sur le recto -->
+					<button class="star-button" onclick="starClicked()">★</button>
 
 					<div class="card-bottom">
 						<div class="tags">
@@ -55,5 +84,7 @@
     </div>
 
     <script src="flipcard.js"></script>
+	
+    
 </body>
 </html>
