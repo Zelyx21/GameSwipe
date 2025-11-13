@@ -7,10 +7,6 @@
     <link rel="shortcut icon" href="logo/favori.svg" type="image/svg">
     <title>GameSwipe</title>
 
-    <style>
-        
-    </style>
-
 </head>
 <body>
     <header>
