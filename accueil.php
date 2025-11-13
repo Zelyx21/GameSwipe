@@ -7,13 +7,6 @@
     <link rel="shortcut icon" href="logo/favori.svg" type="image/svg">
     <title>GameSwipe</title>
 
-    <style>
-        a{
-            color: inherit;
-            text-decoration: none;
-        }
-    </style>
-
 </head>
 <body>
     <header>
@@ -23,7 +16,7 @@
             <a href="connecter.php"><img src="logo/boutons/Nom=Connecter, Etat=Normal.svg" alt="Connecter" class="connecter"></a>
             <a href="deconnexion.php"><img src="logo/boutons/Nom=Déconnecter, Etat=Normal.svg" alt="Deconnecter" class="deconnecter"></a>
             <a href="favori.php"><img src="logo/boutons/Nom=Favori, Etat=Normal.svg" alt="Favori" class="favori"></a>
-            <a href="like.php"><img src="logo/boutons/Nom=Dislike, Etat=Normal.svg" alt="Like" class="like"></a>
+            <a href="like.php"><img src="logo/boutons/Nom=Like, Etat=Normal.svg" alt="Like" class="like"></a>
             <a href="dislike.php"><img src="logo/boutons/Nom=Dislike, Etat=Normal.svg" alt="Dislike" class="dislike"></a>
             <!-- ajouter filtres ici -->
         </div>

@@ -7,31 +7,11 @@
     <link rel="shortcut icon" href="logo/favori.svg" type="image/svg">
     <title>GameSwipe</title>
 
-    <style>
-        .bottom_bar{
-            position: fixed;
-            background-color: #493C60;
-            bottom: 0;
-            width: 100%;
-            height: 14%;
-        }
-
-        .inscription_bloc{
-            display: flex;
-            flex-direction: column;
-            background-color: #CFBFEE;
-            border-radius: 5%;
-            width: 33%;
-            height: 26em;
-            margin: 5% auto;
-        }
-    </style>
-
 </head>
 <body>
     <header>
         <div class="top_bar">
-            <button class="gameswipe"><a href="accueil.php">GameSwipe</a></button>
+            <a href="accueil.php"><img src="logo/boutons/Nom=GameSwipe, Etat=Normal.svg" alt="GameSwipe" class="gameswipe"></a>
         </div>
         <div>
             <div class="inscription_bloc">
