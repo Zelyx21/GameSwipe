@@ -25,7 +25,7 @@
                 <p class="label">Confirmer le mot de passe</p>
                 <input type="text" name="mdp2_utilisateur">
                 <div class="fin_inscription_bloc">
-                    <button class="button_bar_inscription"><a href="connecter.html">Se connecter</a></button>
+                    <button class="button_bar_inscription"><a href="connecter.php">Se connecter</a></button>
                     <button class="button_bar_inscription"><a href="accueil.php">Envoyer</a></button>
                 </div>
             </div>

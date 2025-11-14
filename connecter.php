@@ -21,7 +21,7 @@
                 <p class="label">Mot de passe</p>
                 <input type="text" name="mdp1_utilisateur">
                 <div class="fin_inscription_bloc">
-                    <button class="button_bar_inscription"><a href="inscription.html">Créer un compte</a></button>
+                    <button class="button_bar_inscription"><a href="inscription.php">Créer un compte</a></button>
                     <button class="button_bar_inscription"><a href="accueil.php">Se connecter</a></button>
                 </div>
             </div>
