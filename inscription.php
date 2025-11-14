@@ -7,15 +7,11 @@
     <link rel="shortcut icon" href="logo/favori.svg" type="image/svg">
     <title>GameSwipe</title>
 
-    <style>
-        
-    </style>
-
 </head>
 <body>
     <header>
         <div class="top_bar">
-            <button class="gameswipe"><a href="accueil.php">GameSwipe</a></button>
+            <a href="accueil.php"><img src="logo/boutons/Nom=GameSwipe, Etat=Normal.svg" alt="GameSwipe" class="gameswipe"></a>
         </div>
         <div>
             <div class="inscription_bloc">

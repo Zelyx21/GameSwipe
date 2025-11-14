@@ -6,6 +6,7 @@ body {
     margin: 0;
     padding: 0;
     background: #1A183B;
+    font-family: 'Kanit', sans-serif;
 }
 
 h1{
@@ -27,16 +28,10 @@ a{
 }
 
 
-/* accueil */
-.button_bar {
-    position: relative;
-    padding: 10px 20px;
-    border: none;
-    background-color: rgb(39, 1, 67);
-    border-radius: 10px;
-    color: #8874DF;
-    height: auto;
-    width: auto;
+/* Barre du haut */
+.gameswipe:hover{
+    content: url('../logo/boutons/Nom=GameSwipe\,\ Etat=Souris.svg');
+    transition: 0.3s;
 }
 
 .gameswipe {
@@ -47,6 +42,36 @@ a{
     font-weight: bold;
     margin-top: 18px;
     margin-left: 20px;
+}
+
+.inscrire:hover{
+    content: url('../logo/boutons/Nom=Inscrire\,\ Etat=Souris.svg');
+    transition: 0.3s;
+}
+
+.connecter:hover{
+    content: url('../logo/boutons/Nom=Connecter\,\ Etat=Souris.svg');
+    transition: 0.3s;
+}
+
+.deconnecter:hover{
+    content: url('../logo/boutons/Nom=Déconnecter\,\ Etat=Souris.svg');
+    transition: 0.3s;
+}
+
+.favori:hover{
+    content: url('../logo/boutons/Nom=Favori\,\ Etat=Souris.svg');
+    transition: 0.3s;
+}
+
+.like:hover{
+    content: url('../logo/boutons/Nom=Like\,\ Etat=Souris.svg');
+    transition: 0.3s;
+}
+
+.dislike:hover{
+    content: url('../logo/boutons/Nom=Dislike\,\ Etat=Souris.svg');
+    transition: 0.3s;
 }
 
 .top_bar {
