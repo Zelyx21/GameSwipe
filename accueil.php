@@ -7,34 +7,22 @@
     <link rel="shortcut icon" href="logo/favori.svg" type="image/svg">
     <title>GameSwipe</title>
 
-    <style>
-        a{
-            color: inherit;
-            text-decoration: none;
-        }
-    </style>
-
 </head>
 <body>
     <header>
         <div class="top_bar">
-            <button class="gameswipe"><a href="accueil.php">GameSwipe</a></button>
-            
-            <button class="button_bar"><a href="inscription.html">S'inscrire</a></button>
-            <button class="button_bar"><a href="connecter.html">Se connecter</a></button>
-
-            <button class="button_bar"><img src="logo/favori.svg" alt="favori"></button>
-            <button class="button_bar"><img src="logo/like.svg" alt="like"></button>
-            <button class="button_bar">
-                <img src="logo/like.svg" alt="like">
-                <img class="logo" src="logo/dislike.svg" alt="dislike">
-            </button>
-
-            <button class="button_bar">Filtres</button>
+            <a href="accueil.php"><img src="logo/boutons/Nom=GameSwipe, Etat=Normal.svg" alt="GameSwipe" class="gameswipe"></a>
+            <a href="inscription.php"><img src="logo/boutons/Nom=Inscrire, Etat=Normal.svg" alt="Inscrire" class="inscrire"></a>
+            <a href="connecter.php"><img src="logo/boutons/Nom=Connecter, Etat=Normal.svg" alt="Connecter" class="connecter"></a>
+            <a href="deconnexion.php"><img src="logo/boutons/Nom=Déconnecter, Etat=Normal.svg" alt="Deconnecter" class="deconnecter"></a>
+            <a href="favori.php"><img src="logo/boutons/Nom=Favori, Etat=Normal.svg" alt="Favori" class="favori"></a>
+            <a href="like.php"><img src="logo/boutons/Nom=Like, Etat=Normal.svg" alt="Like" class="like"></a>
+            <a href="dislike.php"><img src="logo/boutons/Nom=Dislike, Etat=Normal.svg" alt="Dislike" class="dislike"></a>
+            <!-- ajouter filtres ici -->
         </div>
     </header>
     <div class="burger_bar">
-            <button class="burger"><img src="logo/burger_menu.svg" alt="berger menu"></button>
+            <button class="burger"><img src="logo/burger_menu.svg" alt="burger menu"></button>
     </div>
     
 </body>
