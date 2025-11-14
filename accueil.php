@@ -6,14 +6,6 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="logo/favori.svg" type="image/svg">
     <title>GameSwipe</title>
-
-    <style>
-        a{
-            color: inherit;
-            text-decoration: none;
-        }
-    </style>
-
 </head>
 <body>
     <header>
@@ -33,9 +25,8 @@
             <button class="button_bar">Filtres</button>
         </div>
     </header>
-    <div class="burger_bar">
-            <button class="burger"><img src="logo/burger_menu.svg" alt="berger menu"></button>
-    </div>
+
+    <?php include 'burger.php'; ?>
     
 </body>
 </html>

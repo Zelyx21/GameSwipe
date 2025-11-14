@@ -1,7 +1,17 @@
+*{
+    font-family: 'Kanit', sans-serif;
+}
+
 body {
     margin: 0;
     padding: 0;
     background: #1A183B;
+}
+
+h1{
+    font-size: 2.8em;
+    color: #8874DF;
+    font-weight: bold;
 }
 
 h2{
@@ -32,7 +42,7 @@ a{
 .gameswipe {
     background-color: transparent;
     border: none;
-    font-size: 4em;
+    font-size: 3em;
     color: #8874DF;
     font-weight: bold;
     margin-top: 18px;
@@ -84,8 +94,13 @@ a{
 }
 
 .burger_bar{
-    margin-top: 2%;
-    margin-left: 2%;
+    display: flex;
+    background-color: transparent;
+    gap: 34em;
+}
+
+body.burger-bg .burger_bar {
+    background-color: #3C2C59;
 }
 
 .burger {
@@ -96,6 +111,9 @@ a{
   border: none;
   background-color: transparent;
   cursor: pointer;
+  margin-top: 2em;
+  margin-left: 3em;
+  margin-bottom: 1.5em;
 }
 
 
