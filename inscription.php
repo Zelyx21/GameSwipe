@@ -11,7 +11,11 @@
 <body>
     <header>
         <div class="top_bar">
-            <a href="accueil.php"><img src="logo/boutons/Nom=GameSwipe, Etat=Normal.svg" alt="GameSwipe" class="gameswipe"></a>
+            <div class="left_group">
+                <div class="gameswipe">
+                    <a href="accueil.php"><img src="logo/boutons/Nom=GameSwipe, Etat=Normal.svg" alt="GameSwipe" class="gameswipe"></a>
+                </div>
+            </div>
         </div>
         <div>
             <div class="inscription_bloc">

@@ -19,7 +19,8 @@ a{
 
 
 /* Barre du haut */
-.gameswipe:hover{
+
+.gameswipe:hover img{
     content: url('../logo/boutons/Nom=GameSwipe\,\ Etat=Souris.svg');
     transition: 0.3s;
 }
@@ -54,48 +55,45 @@ a{
     transition: 0.3s;
 }
 
+.filtres:hover{
+    content: url('../logo/boutons/Nom=Filtres\,\ Etat=Souris.svg');
+    transition: 0.3s;
+}
+
 .top_bar {
     display: flex;
     align-items: center;
-    margin-right: 2%;
+    justify-content: space-between; /*sépare gauche et droite*/
     background-color: #493C60;
     width: 100%;
     height: 100px;
 }
 
-.top_bar button:nth-child(2) {
-    font-size: 3ch;
-    font-weight: bold;
-    margin-left: 3%;
+.left_group, .right_group {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
-.top_bar button:nth-child(3) {
-    font-size: 3ch;
-    font-weight: bold;
-    margin-left: 1%;
+.gameswipe{
+    margin-left: 6%;
 }
 
-.top_bar button:nth-child(4) {
-    margin-left: 11%;
+.bouton_filtres {
+    display: flex;
+    margin-right: 100px; /* espace entre le bouton et le bord droit */
 }
 
-.top_bar button:nth-child(5) {
-    margin-left: 30px;
+.boutons_compte{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 10%;
 }
-
-.top_bar button:nth-child(6) {
-    margin-left: 30px;
-}
-
-.top_bar button:nth-child(7) {
-    font-size: 3ch;
-    font-weight: bold;
-    margin-left: auto;
-    margin-right: 3%;
-}
-
-.logo{
-    position: absolute;
+.boutons_categories {
+    display: flex;
+    gap: 10px; /* espace interne entre chaque bouton */
+    margin-right: 200px;
 }
 
 .burger_bar{
