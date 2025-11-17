@@ -1,10 +1,19 @@
+*{
+    font-family: 'Kanit', sans-serif;
+}
+
 body {
     margin: 0;
     padding: 0;
     background: #1A183B;
+    font-family: 'Kanit', sans-serif;
 }
 
-
+h1{
+    font-size: 2.8em;
+    color: #8874DF;
+    font-weight: bold;
+}
 
 h2{
     font-size: 2.5em;
@@ -19,26 +28,50 @@ a{
 }
 
 
-/* accueil */
-.button_bar {
-    position: relative;
-    padding: 0.6% 1.2%; /*cela permet de rendre les dimensions proportionnelles afin qu'elles s'adapte à tous les types/tailles d'écrans*/
-    border: none;
-    background-color: rgb(39, 1, 67);
-    border-radius: 1%; /* idem j'ai moddifié les taile px en % pour uen meilleure lisibillité sous n'importe quel PC */
-    color: #8874DF;
-    height: auto;
-    width: auto;
+/* Barre du haut */
+.gameswipe:hover{
+    content: url('../logo/boutons/Nom=GameSwipe\,\ Etat=Souris.svg');
+    transition: 0.3s;
 }
 
 .gameswipe {
     background-color: transparent;
     border: none;
-    font-size: 2em;
+    font-size: 3em;
     color: #8874DF;
     font-weight: bold;
-    margin-top: 0.5%; /* idem */
-    margin-left: 1%; /* idem */
+    margin-top: 18px;
+    margin-left: 20px;
+}
+
+.inscrire:hover{
+    content: url('../logo/boutons/Nom=Inscrire\,\ Etat=Souris.svg');
+    transition: 0.3s;
+}
+
+.connecter:hover{
+    content: url('../logo/boutons/Nom=Connecter\,\ Etat=Souris.svg');
+    transition: 0.3s;
+}
+
+.deconnecter:hover{
+    content: url('../logo/boutons/Nom=Déconnecter\,\ Etat=Souris.svg');
+    transition: 0.3s;
+}
+
+.favori:hover{
+    content: url('../logo/boutons/Nom=Favori\,\ Etat=Souris.svg');
+    transition: 0.3s;
+}
+
+.like:hover{
+    content: url('../logo/boutons/Nom=Like\,\ Etat=Souris.svg');
+    transition: 0.3s;
+}
+
+.dislike:hover{
+    content: url('../logo/boutons/Nom=Dislike\,\ Etat=Souris.svg');
+    transition: 0.3s;
 }
 
 .top_bar {
@@ -47,7 +80,7 @@ a{
     margin-right: 2%;
     background-color: #493C60;
     width: 100%;
-    height: 10%;
+    height: 100px;
 }
 
 .top_bar button:nth-child(2) {
@@ -62,55 +95,16 @@ a{
     margin-left: 1%;
 }
 
-
-/* Boutons icônes (favori, like, dislike) */
 .top_bar button:nth-child(4) {
-    margin-left: 25%; /*  pousse le premier bouton du groupe vers la droite */
+    margin-left: 11%;
 }
 
-/* Les autres boutons du groupe gardent leur espacement */
-.top_bar button:nth-child(5),
+.top_bar button:nth-child(5) {
+    margin-left: 30px;
+}
+
 .top_bar button:nth-child(6) {
-    margin-left: 2.5%; /* ou l’espacement souhaité entre eux */
-}
-.top_bar button:nth-child(4),
-.top_bar button:nth-child(5),
-.top_bar button:nth-child(6) {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background-color: rgb(39, 1, 67);
-    border: none;
-    border-radius: 10%;
-    padding: 0.3%;
-
-    width: 4%;   /* taille proportionnelle  */
-    height: auto;
-}
-}
-
-/* Image dans les boutons (favori, like) */
-.top_bar button:nth-child(4) img,
-.top_bar button:nth-child(5) img {
-    width: 70%;  /* 👈 image proportionnelle à la taille du bouton */
-    height: auto;
-}
-
-/* Bouton double image (like + dislike) */
-.top_bar button:nth-child(6) img:first-child {
-    width: 70%;
-    height: auto;
-}
-
-.top_bar button:nth-child(6) .logo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 70%;
-    height: auto;
-    pointer-events: none;
+    margin-left: 30px;
 }
 
 .top_bar button:nth-child(7) {
@@ -125,27 +119,35 @@ a{
 }
 
 .burger_bar{
-    margin-top: 2%;
-    margin-left: 2%;
+    display: flex;
+    background-color: transparent;
+    gap: 34em;
+}
+
+body.burger-bg .burger_bar {
+    background-color: #3C2C59;
 }
 
 .burger {
   position: relative;
-  width: 4%; /* idem */
-  height: auto; /* idem mais en auto ce sera plus simple*/
+  width: 60px;
+  height: 60px;
   padding: 0;
   border: none;
   background-color: transparent;
   cursor: pointer;
+  margin-top: 2em;
+  margin-left: 3em;
+  margin-bottom: 1.5em;
 }
 
 
 /* inscription et connection */
 .button_bar_inscription {
-    padding: 1% 2%; /* idem */
+    padding: 10px 30px;
     border: none;
     background-color: #6E5ABC;
-    border-radius: 1%;
+    border-radius: 10px;
     color: #fff;
     height: auto;
     width: auto;
@@ -172,8 +174,8 @@ a{
     height: 32em;
     margin: 2% auto;
     box-sizing: border-box;
-    padding-left: 4%; /* idem */
-    padding-right: 4%; /* idem */
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
 .label{
@@ -204,15 +206,13 @@ input{
 
 .card-container {
     display: flex;
-	justify-content: center;  /* centre horizontalement */
-    align-items: center;      /* centre verticalement */
-    height: calc(100vh - 10% - 14%); /* 100% de la hauteur de la page moins la top_bar et bottom_bar */
-    gap: 20px;
-    margin: 0 auto;
+    justify-content: center;
+    align-items: center; 
+	width: 100%;
+    height: 100vh;
 }
 
 /* Flip card */
-
 
 .flip-card {
     width: 300px;
