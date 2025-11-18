@@ -22,14 +22,18 @@
         </div>
         <div>
             <div class="inscription_bloc">
-                <h2>Créer un compte</h2>
+                <h2>Connexion</h2>
                 <form method="POST" id="form" class="formulaire">
+
                     <label>Adresse e-mail ou nom d'utilisateur</label>
-                    <input type="text" name="email_utilisateur">
+                    <input type="text" id="mail_nom" name="email_utilisateur" required>
+
                     <label>Mot de passe</label>
-                    <input type="text" name="mdp1_utilisateur">
+                    <input type="password" id="mdp" name="mdp1_utilisateur" required>
+
                     <a href="inscription.php" class="btn_secondaire">Créer un compte</a>
-                    <button type="submit">Se connecter</button>
+                    <button type="submit" id="btn_submit">Se connecter</button>
+
                 </form>
             </div>
         </div>
