@@ -1,42 +1,49 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="shortcut icon" href="logo/favori.svg" type="image/svg">
-    <title>GameSwipe</title>
+    <title>Inscription - GameSwipe</title>
 
 </head>
+
 <body>
     <header>
         <div class="top_bar">
             <div class="left_group">
                 <div class="gameswipe">
-                    <a href="accueil.php"><img src="logo/boutons/Nom=GameSwipe, Etat=Normal.svg" alt="GameSwipe" class="gameswipe"></a>
+                    <a href="accueil.php"><img src="logo/boutons/Nom=GameSwipe, Etat=Normal.svg" alt="GameSwipe"
+                            class="gameswipe"></a>
                 </div>
             </div>
         </div>
         <div>
             <div class="inscription_bloc">
                 <h2>Créer un compte</h2>
-                <p class="label">Nom d'utilisateur</p>
-                <input type="text" name="nom_utilisateur">
-                <p class="label">Adresse e-mail</p>
-                <input type="text" name="email_utilisateur">
-                <p class="label">Mot de passe</p>
-                <input type="text" name="mdp1_utilisateur">
-                <p class="label">Confirmer le mot de passe</p>
-                <input type="text" name="mdp2_utilisateur">
-                <div class="fin_inscription_bloc">
-                    <button class="button_bar_inscription"><a href="connecter.php">Se connecter</a></button>
-                    <button class="button_bar_inscription"><a href="accueil.php">Envoyer</a></button>
-                </div>
+                <form method="POST" id="form" class="formulaire">
+
+                    <label>Nom d'utilisateur</label>
+                    <input type="text" id="name" name="nom_utilisateur" required>
+
+                    <label>Adresse e-mail</label>
+                    <input type="email" id="mail" name="email_utilisateur" required>
+
+                    <label>Mot de passe</label>
+                    <input type="password" id="mdp1" name="mdp1_utilisateur" required>
+
+                    <label>Confirmer le mot de passe</label>
+                    <input type="password" id="mdp2" name="mdp2_utilisateur" required>
+
+                    <a href="connecter.php"><button>Se connecter</button></a>
+                    <button type="submit">S'inscrire</button>
+                </form>
             </div>
         </div>
         <div class="bottom_bar"></div>
     </header>
-    
-    
+
+
 </body>
+
 </html>

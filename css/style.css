@@ -141,27 +141,6 @@ body.burger-bg .burger_bar {
 
 
 /* inscription et connection */
-.button_bar_inscription {
-    padding: 10px 30px;
-    border: none;
-    background-color: #6E5ABC;
-    border-radius: 10px;
-    color: #fff;
-    height: auto;
-    width: auto;
-}
-
-.fin_inscription_bloc button:nth-child(1) {
-    font-size: 3ch;
-    font-weight: bold;
-    margin-left: 3%;
-}
-
-.fin_inscription_bloc button:nth-child(2) {
-    font-size: 3ch;
-    font-weight: bold;
-    margin-left: 1%;
-}
 
 .inscription_bloc{
     display: flex;
@@ -176,21 +155,48 @@ body.burger-bg .burger_bar {
     padding-right: 40px;
 }
 
-.label{
-    font-size: 23px;
-    margin-bottom: 0;
+.inscription_bloc h2 {
+    font-size: 28px;
     color: #3b3b3b;
+    margin-bottom: 20px;
+    text-align: left;
 }
 
-input{
-    height: 6%;
-    border-radius: 10px;
+.formulaire label{
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: #3b3b3b;
+    margin-top: 10px;
 }
 
-.fin_inscription_bloc{
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
+.formulaire input{
+    width: 90%;
+    margin-top: 6px;
+    padding: 12px;
+    border-radius: 20px;
+    border: 2px #7a5bcf solid;
+    background-color: #f0f2ff;
+    font-size: 16px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.formulaire button {
+    padding: 12px 28px;
+    background-color: #7a5bcf;
+    border: none;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 25px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: 0.2s;
+}
+
+.formulaire button:hover{
+    background-color: #6a4cc8;
 }
 
 /* bottom_bar */
