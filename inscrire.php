@@ -8,13 +8,25 @@ if (!isset($_POST['token'], $_SESSION['token']) || $_SESSION['token'] != $_POST[
     echo "Erreur de token.";
     exit;
 }
-unset($_SESSION["token"]);
-unset($_POST["token"]);
 
 $nom = $_POST["nom"];
 $mail = $_POST["mail"];
 $mdp1 = $_POST["mdp1"];
 $mdp2 = $_POST["mdp2"];
+
+// Vérifier si le nom ou le mail existe déjà
+$sql = "SELECT * FROM client WHERE nom_client = :nom OR mail = :mail";
+$stmt = $bdd->prepare($sql);
+$stmt->execute([
+    ':nom' => $nom,
+    ':mail' => $mail
+]);
+
+if ($stmt->rowCount() > 0) {
+    echo "Nom ou mail déjà utilisé.";
+    exit;
+}
+
 
 if ($mdp1 != $mdp2) {
     echo "Les mots de passe ne sont pas identiques.";
@@ -28,6 +40,7 @@ if ($mdp1 != $mdp2) {
         ':mdp' => $mdp
     ]);
     $_SESSION['client'] = ['nom' => $nom, 'mail' => $mail];
+    unset($_SESSION['token']);
     echo '1';
 }
 ?>
