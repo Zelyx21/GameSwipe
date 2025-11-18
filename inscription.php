@@ -32,15 +32,19 @@ $_SESSION['token'] = bin2hex(random_bytes(32));
 
                     <label>Nom d'utilisateur</label>
                     <input type="text" id="nom" name="nom" required>
+                    <p id="message_nom"></p>
 
                     <label>Adresse e-mail</label>
-                    <input type="email" id="mail" name="mail" required>
+                    <input type="text" id="mail" name="mail" required>
+                    <p id="message_mail"></p>
 
                     <label>Mot de passe</label>
                     <input type="password" id="mdp1" name="mdp1" required>
+                    <p id="message_mdp1"></p>
 
                     <label>Confirmer le mot de passe</label>
                     <input type="password" id="mdp2" name="mdp2" required>
+                    <p id="message_mdp2"></p>
 
                     <input type="hidden" id="token" name="token" value="<?php echo $_SESSION['token']; ?>">
 

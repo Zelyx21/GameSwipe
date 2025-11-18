@@ -27,6 +27,7 @@ if ($mdp1 != $mdp2) {
         ':mail' => $mail,
         ':mdp' => $mdp
     ]);
+    $_SESSION['client'] = ['nom' => $nom, 'mail' => $mail];
     echo '1';
 }
 ?>

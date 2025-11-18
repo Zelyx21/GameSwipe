@@ -43,6 +43,7 @@ a {
     font-weight: bold;
     margin-top: 18px;
     margin-left: 20px;
+    margin-bottom:2%;
 }
 
 .inscrire:hover {
@@ -153,7 +154,6 @@ body.burger-bg .burger_bar {
     background-color: #CFBFEE;
     border-radius: 5%;
     width: 33%;
-    height: 34em;
     margin: 2% auto;
     box-sizing: border-box;
     padding-left: 40px;
@@ -195,13 +195,19 @@ body.burger-bg .burger_bar {
     font-size: 17px;
     font-weight: bold;
     cursor: pointer;
-    margin-top: 25px;
+    margin-top: 2%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: 0.2s;
 }
 
 .formulaire button:hover {
     background-color: #957ed7;
+}
+
+.formulaire p{
+    margin-top:1%;
+    margin-bottom:1%;
+    margin-left: 7px;
 }
 
 /* bouton secondaire pour que ça redirige bien */
@@ -214,7 +220,7 @@ body.burger-bg .burger_bar {
     font-size: 17px;
     font-weight: bold;
     cursor: pointer;
-    margin-top: 25px;
+    margin-top: 2%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: 0.2s;
 }
@@ -229,5 +235,5 @@ body.burger-bg .burger_bar {
     background-color: #493C60;
     bottom: 0;
     width: 100%;
-    height: 14%;
+    height: 10%;
 }
