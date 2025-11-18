@@ -1,0 +1,12 @@
+<?php
+function getBDD() {
+    try {
+        // Connexion PDO
+        $bdd = new PDO('mysql:host=localhost;dbname=gameswipe;charset=utf8', 'root', '');
+        return $bdd;
+
+    } catch (PDOException $e) {
+        die("Erreur de connexion : " . $e->getMessage());
+    }
+}
+?>
