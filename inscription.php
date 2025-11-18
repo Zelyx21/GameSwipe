@@ -35,7 +35,7 @@
                     <label>Confirmer le mot de passe</label>
                     <input type="password" id="mdp2" name="mdp2_utilisateur" required>
 
-                    <a href="connecter.php"><button>Se connecter</button></a>
+                    <a href="connexion.php" class="btn_secondaire">Se connecter</a>
                     <button type="submit">S'inscrire</button>
                 </form>
             </div>

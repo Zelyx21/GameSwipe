@@ -1,4 +1,4 @@
-*{
+* {
     font-family: 'Kanit', sans-serif;
 }
 
@@ -9,20 +9,20 @@ body {
     font-family: 'Kanit', sans-serif;
 }
 
-h1{
+h1 {
     font-size: 2.8em;
     color: #8874DF;
     font-weight: bold;
 }
 
-h2{
+h2 {
     font-size: 2.5em;
     color: #000;
     margin-top: 18px;
     margin-bottom: 12px;
 }
 
-a{
+a {
     color: inherit;
     text-decoration: none;
 }
@@ -30,7 +30,7 @@ a{
 
 /* Barre du haut */
 
-.gameswipe:hover img{
+.gameswipe:hover img {
     content: url('../logo/boutons/Nom=GameSwipe\,\ Etat=Souris.svg');
     transition: 0.3s;
 }
@@ -45,37 +45,37 @@ a{
     margin-left: 20px;
 }
 
-.inscrire:hover{
+.inscrire:hover {
     content: url('../logo/boutons/Nom=Inscrire\,\ Etat=Souris.svg');
     transition: 0.3s;
 }
 
-.connecter:hover{
+.connecter:hover {
     content: url('../logo/boutons/Nom=Connecter\,\ Etat=Souris.svg');
     transition: 0.3s;
 }
 
-.deconnecter:hover{
+.deconnecter:hover {
     content: url('../logo/boutons/Nom=Déconnecter\,\ Etat=Souris.svg');
     transition: 0.3s;
 }
 
-.favori:hover{
+.favori:hover {
     content: url('../logo/boutons/Nom=Favori\,\ Etat=Souris.svg');
     transition: 0.3s;
 }
 
-.like:hover{
+.like:hover {
     content: url('../logo/boutons/Nom=Like\,\ Etat=Souris.svg');
     transition: 0.3s;
 }
 
-.dislike:hover{
+.dislike:hover {
     content: url('../logo/boutons/Nom=Dislike\,\ Etat=Souris.svg');
     transition: 0.3s;
 }
 
-.filtres:hover{
+.filtres:hover {
     content: url('../logo/boutons/Nom=Filtres\,\ Etat=Souris.svg');
     transition: 0.3s;
 }
@@ -83,40 +83,45 @@ a{
 .top_bar {
     display: flex;
     align-items: center;
-    justify-content: space-between; /*sépare gauche et droite*/
+    justify-content: space-between;
+    /*sépare gauche et droite*/
     background-color: #493C60;
     width: 100%;
     height: 100px;
 }
 
-.left_group, .right_group {
+.left_group,
+.right_group {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-.gameswipe{
+.gameswipe {
     margin-left: 6%;
 }
 
 .bouton_filtres {
     display: flex;
-    margin-right: 100px; /* espace entre le bouton et le bord droit */
+    margin-right: 100px;
+    /* espace entre le bouton et le bord droit */
 }
 
-.boutons_compte{
+.boutons_compte {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-left: 10%;
 }
+
 .boutons_categories {
     display: flex;
-    gap: 10px; /* espace interne entre chaque bouton */
+    gap: 10px;
+    /* espace interne entre chaque bouton */
     margin-right: 200px;
 }
 
-.burger_bar{
+.burger_bar {
     display: flex;
     background-color: transparent;
     gap: 34em;
@@ -127,22 +132,22 @@ body.burger-bg .burger_bar {
 }
 
 .burger {
-  position: relative;
-  width: 60px;
-  height: 60px;
-  padding: 0;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  margin-top: 2em;
-  margin-left: 3em;
-  margin-bottom: 1.5em;
+    position: relative;
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-top: 2em;
+    margin-left: 3em;
+    margin-bottom: 1.5em;
 }
 
 
-/* inscription et connection */
+/* inscription et connexion */
 
-.inscription_bloc{
+.inscription_bloc {
     display: flex;
     flex-direction: column;
     background-color: #CFBFEE;
@@ -156,21 +161,21 @@ body.burger-bg .burger_bar {
 }
 
 .inscription_bloc h2 {
-    font-size: 28px;
-    color: #3b3b3b;
-    margin-bottom: 20px;
-    text-align: left;
+    font-size: 270%;
+    color: #562281;
+    text-align: center;
 }
 
-.formulaire label{
+.formulaire label {
     display: block;
-    font-size: 16px;
-    font-weight: 600;
-    color: #3b3b3b;
+    font-size: 110%;
+    font-weight: 700;
+    color: #5F4293;
     margin-top: 10px;
+    margin-left: 7px;
 }
 
-.formulaire input{
+.formulaire input {
     width: 90%;
     margin-top: 6px;
     padding: 12px;
@@ -178,7 +183,7 @@ body.burger-bg .burger_bar {
     border: 2px #7a5bcf solid;
     background-color: #f0f2ff;
     font-size: 16px;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .formulaire button {
@@ -191,16 +196,35 @@ body.burger-bg .burger_bar {
     font-weight: bold;
     cursor: pointer;
     margin-top: 25px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: 0.2s;
 }
 
-.formulaire button:hover{
-    background-color: #6a4cc8;
+.formulaire button:hover {
+    background-color: #957ed7;
+}
+
+/* bouton secondaire pour que ça redirige bien */
+.btn_secondaire {
+    padding: 12px 28px;
+    background-color: #7a5bcf;
+    border: none;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: 0.2s;
+}
+
+.btn_secondaire:hover {
+    background-color: #957ed7;
 }
 
 /* bottom_bar */
-.bottom_bar{
+.bottom_bar {
     position: fixed;
     background-color: #493C60;
     bottom: 0;
