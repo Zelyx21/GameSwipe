@@ -1,10 +1,15 @@
+<?php
+session_start();
+$_SESSION['token'] = bin2hex(random_bytes(32));
+?>
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/connexion.js"></script>
     <title>GameSwipe</title>
 
 </head>
@@ -25,15 +30,18 @@
                 <form method="POST" id="form" class="formulaire">
 
                     <label>Adresse e-mail ou nom d'utilisateur</label>
-                    <input type="text" id="mail_nom" name="email_utilisateur" required>
+                    <input type="text" id="mail_nom" name="mail_nom">
 
                     <label>Mot de passe</label>
-                    <input type="password" id="mdp" name="mdp1_utilisateur" required>
+                    <input type="password" id="mdp" name="mdp">
+
+                    <input type="hidden" id="token" name="token" value="<?php echo $_SESSION['token']; ?>">
 
                     <a href="inscription.php" class="btn_secondaire">Créer un compte</a>
                     <button type="submit" id="btn_submit">Se connecter</button>
 
                 </form>
+                <p id="message_form"></p>
             </div>
         </div>
         <div class="bottom_bar"></div>

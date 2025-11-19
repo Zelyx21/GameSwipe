@@ -39,7 +39,7 @@ if ($mdp1 != $mdp2) {
         ':mail' => $mail,
         ':mdp' => $mdp
     ]);
-    $_SESSION['client'] = ['nom' => $nom, 'mail' => $mail];
+    $_SESSION['client'] = array('nom' => $nom, 'mail' => $mail);
     unset($_SESSION['token']);
     echo '1';
 }
