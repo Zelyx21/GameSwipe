@@ -30,7 +30,7 @@ if ($stmt->rowCount() > 0) {
 
 if ($mdp1 != $mdp2) {
     echo "Les mots de passe ne sont pas identiques.";
-}else{
+} else {
     $sql = "INSERT INTO client (nom_client, mail, mdp) VALUES (:nom,:mail,:mdp)";
     $mdp = password_hash($mdp1, PASSWORD_DEFAULT);
     $req = $bdd->prepare($sql);
@@ -39,7 +39,11 @@ if ($mdp1 != $mdp2) {
         ':mail' => $mail,
         ':mdp' => $mdp
     ]);
-    $_SESSION['client'] = array('nom' => $nom, 'mail' => $mail);
+
+    //récupère l'id
+    $id_client = $bdd->lastInsertId();
+
+    $_SESSION['client'] = array('id' => $id_client, 'nom' => $nom, 'mail' => $mail);
     unset($_SESSION['token']);
     echo '1';
 }
