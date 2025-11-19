@@ -1,300 +1,106 @@
-*{
+/* ===== Reset & Font ===== */
+* {
     font-family: 'Kanit', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    padding: 0;
     background: #1A183B;
-    font-family: 'Kanit', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
 }
 
-h1{
-    font-size: 2.8em;
-    color: #8874DF;
-    font-weight: bold;
-}
-
-h2{
-    font-size: 2.5em;
-    color: #000;
-    margin-top: 18px;
-    margin-bottom: 12px;
-}
-
-a{
-    color: inherit;
-    text-decoration: none;
-}
-
-
-/* Barre du haut */
-.gameswipe:hover{
-    content: url('../logo/boutons/Nom=GameSwipe\,\ Etat=Souris.svg');
-    transition: 0.3s;
-}
-
-.gameswipe {
-    background-color: transparent;
-    border: none;
-    font-size: 3em;
-    color: #8874DF;
-    font-weight: bold;
-    margin-top: 18px;
-    margin-left: 20px;
-}
-
-.inscrire:hover{
-    content: url('../logo/boutons/Nom=Inscrire\,\ Etat=Souris.svg');
-    transition: 0.3s;
-}
-
-.connecter:hover{
-    content: url('../logo/boutons/Nom=Connecter\,\ Etat=Souris.svg');
-    transition: 0.3s;
-}
-
-.deconnecter:hover{
-    content: url('../logo/boutons/Nom=Déconnecter\,\ Etat=Souris.svg');
-    transition: 0.3s;
-}
-
-.favori:hover{
-    content: url('../logo/boutons/Nom=Favori\,\ Etat=Souris.svg');
-    transition: 0.3s;
-}
-
-.like:hover{
-    content: url('../logo/boutons/Nom=Like\,\ Etat=Souris.svg');
-    transition: 0.3s;
-}
-
-.dislike:hover{
-    content: url('../logo/boutons/Nom=Dislike\,\ Etat=Souris.svg');
-    transition: 0.3s;
-}
-
+/* ===== TOP BAR ===== */
 .top_bar {
     display: flex;
     align-items: center;
-    margin-right: 2%;
-    background-color: #493C60;
     width: 100%;
-    height: 100px;
-}
-
-.top_bar button:nth-child(2) {
-    font-size: 3ch;
-    font-weight: bold;
-    margin-left: 3%;
-}
-
-.top_bar button:nth-child(3) {
-    font-size: 3ch;
-    font-weight: bold;
-    margin-left: 1%;
-}
-
-.top_bar button:nth-child(4) {
-    margin-left: 11%;
-}
-
-.top_bar button:nth-child(5) {
-    margin-left: 30px;
-}
-
-.top_bar button:nth-child(6) {
-    margin-left: 30px;
-}
-
-.top_bar button:nth-child(7) {
-    font-size: 3ch;
-    font-weight: bold;
-    margin-left: auto;
-    margin-right: 3%;
-}
-
-.logo{
-    position: absolute;
-}
-
-.burger_bar{
-    display: flex;
-    background-color: transparent;
-    gap: 34em;
-}
-
-body.burger-bg .burger_bar {
-    background-color: #3C2C59;
-}
-
-.burger {
-  position: relative;
-  width: 60px;
-  height: 60px;
-  padding: 0;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  margin-top: 2em;
-  margin-left: 3em;
-  margin-bottom: 1.5em;
-}
-
-
-/* inscription et connection */
-.button_bar_inscription {
-    padding: 10px 30px;
-    border: none;
-    background-color: #6E5ABC;
-    border-radius: 10px;
-    color: #fff;
-    height: auto;
-    width: auto;
-}
-
-.fin_inscription_bloc button:nth-child(1) {
-    font-size: 3ch;
-    font-weight: bold;
-    margin-left: 3%;
-}
-
-.fin_inscription_bloc button:nth-child(2) {
-    font-size: 3ch;
-    font-weight: bold;
-    margin-left: 1%;
-}
-
-.inscription_bloc{
-    display: flex;
-    flex-direction: column;
-    background-color: #CFBFEE;
-    border-radius: 5%;
-    width: 33%;
-    height: 32em;
-    margin: 2% auto;
-    box-sizing: border-box;
-    padding-left: 40px;
-    padding-right: 40px;
-}
-
-.label{
-    font-size: 23px;
-    margin-bottom: 0;
-    color: #3b3b3b;
-}
-
-input{
-    height: 6%;
-    border-radius: 10px;
-}
-
-.fin_inscription_bloc{
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-/* bottom_bar */
-.bottom_bar{
-    position: fixed;
+    height: 10vh;
     background-color: #493C60;
-    bottom: 0;
-    width: 100%;
-    height: 14%;
+    padding: 0 2%;
+    gap: 1%;
 }
 
+.top_bar a img {
+    height: 80%;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.top_bar a img:hover {
+    transform: scale(1.1);
+}
+
+/* ===== CARD CONTAINER ===== */
 .card-container {
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-	width: 100%;
-    height: 100vh;
+    position: relative;
+    width: 90vw;
+    max-width: 400px;
+    height: 500px; /* hauteur fixe pour la pile */
+    margin: 20px auto;
+    perspective: 1000px;
+    overflow: hidden; /* les cartes derrière ne font pas grandir la page */
 }
-
-/* Flip card */
 
 .flip-card {
-    width: 300px;
-    height: 400px;
-    perspective: 1000px; /* perspective sur le parent */
-    position: relative;
-    overflow: visible; /* pour le bouton */
+    position: absolute; /* superposition */
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+
+
+.flip-card:active {
+    cursor: grabbing;
 }
 
 .flip-card-inner {
     width: 100%;
     height: 100%;
-    position: relative;
-    transform-style: preserve-3d; /* nécessaire pour voir le verso */
     transition: transform 0.6s;
+    transform-style: preserve-3d;
 }
 
 .flip-card-inner.flipped {
     transform: rotateY(180deg);
 }
 
+/* ===== FRONT / BACK ===== */
 .card-front, .card-back {
     position: absolute;
     width: 100%;
     height: 100%;
+    border-radius: 10px;
     backface-visibility: hidden;
-    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(135deg,#6a00f4,#9e00ff);
+    color: white;
+    padding: 2%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
 .card-back {
     transform: rotateY(180deg);
 }
 
-/* Style général des cartes */
-.card {
-    color: white;
-    padding: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    background: linear-gradient(135deg, #6a00f4, #9e00ff);
-    overflow: hidden;
-    transition: transform 0.2s ease;
-}
-
-/* Shine effect au hover */
-.card::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
-    transform: rotate(25deg) translateX(-100%);
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.card:hover::before {
-    opacity: 1;
-    animation: shine-hover 1s forwards;
-}
-
-@keyframes shine-hover {
-    0% { transform: rotate(25deg) translateX(-100%); }
-    100% { transform: rotate(25deg) translateX(100%); }
-}
-
-/* Sections de la carte */
+/* ===== CARD CONTENT ===== */
 .card-top {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.card img {
+.card-top img {
     width: 100%;
-    border-radius: 10px;
-    margin: 10px 0;
+    border-radius: 1%;
 }
 
 .card-middle {
@@ -306,44 +112,32 @@ input{
 }
 
 .card-bottom {
-    margin-top: auto;
     display: flex;
     justify-content: center;
+    gap: 1%;
 }
 
-.tags span {
-    margin-right: 5px;
-    font-size: 12px;
-    opacity: 0.7;
-}
-
-.stats {
-    font-size: 14px;
-    opacity: 0.8;
-    text-align: center;
-}
-/* Bouton étoile sur le recto */
+/* ===== STAR BUTTON ===== */
 .star-button {
     position: absolute;
-    top: -10px;             /* dépasse un peu le coin */
-    right: -10px;
-    background-color: #f8f8e0; /* ivoire */
-    color: #9e00ff;           /* violet */
-    border: none;
+    top: -5%;
+    right: -5%;
+    width: 10%;
+    height: 10%;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 22px;
+    background-color: #f8f8e0;
+    color: #9e00ff;
+    border: none;
     cursor: pointer;
+    font-size: 2vw;
     display: flex;
-    align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    align-items: center;
     z-index: 10;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s;
 }
 
 .star-button:hover {
     transform: scale(1.3);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+    box-shadow: 0 1% 3% rgba(0,0,0,0.4);
 }

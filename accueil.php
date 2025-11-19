@@ -1,3 +1,5 @@
+<?php
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -17,58 +19,17 @@
             <a href="favori.php"><img src="logo/boutons/Nom=Favori, Etat=Normal.svg" alt="Favori" class="favori"></a>
             <a href="like.php"><img src="logo/boutons/Nom=Like, Etat=Normal.svg" alt="Like" class="like"></a>
             <a href="dislike.php"><img src="logo/boutons/Nom=Dislike, Etat=Normal.svg" alt="Dislike" class="dislike"></a>
-            <!-- ajouter filtres ici -->
         </div>
     </header>
 
     <?php include 'burger.php'; ?>
-	<div class="card-container">
-        <div class="flip-card">
-            <div class="flip-card-inner">
-                <!-- Recto -->
-                <!-- Recto -->
-				<div class="card card-front">
-	
-					<div class="card-top">
-						<h2>Stardew Valley</h2>
-						<img src="https://imgs.search.brave.com/RVDwqH_TNlS133VagpLCwC7h8wDDrWexs4q0Iidz2uQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvZmVhdHVy/ZWQvc3RhcmRldy12/YWxsZXktbHR1eW5x/cGpiN2M5NWZmcS5q/cGc" alt="Image de la carte">
-					</div>
-					<div class="card-middle">
-						<p>Stardew Valley est un jeu vidéo de type RPG de vie à la campagne à fin ouverte, dans lequel le joueur incarne une personne ayant hérité de la ferme de son grand-père dans Pélican Ville, située dans la vallée "Stardew Valley"</p>
-					</div>
-					
-					<!-- Bouton étoile sur le recto -->
-					<button class="star-button" onclick="starClicked()">★</button>
 
-					<div class="card-bottom">
-						<div class="tags">
-							<span>#RPG</span>
-							<span>#jesaispas</span>
-							<span>#essai</span>
-						</div>
-					</div>
-				</div>
-
-                <!-- Verso -->
-                <div class="card card-back">
-                    <div class="card-top">
-                        <h2>Description</h2>
-                    </div>
-
-                    <div class="card-middle">
-                        <p>-----------------------------</p>
-                    </div>
-
-                    <div class="card-bottom">
-                        <div class="stats">
-                            556 avis positifs / 12 avis négatifs
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="card-container">
+        <div class="card-wrapper" id="card-stack">
+            <!-- Cartes injectées via JS -->
         </div>
     </div>
 
-    <script src="flipcard.js"></script>
+    <script src="flip_swipe_card.js"></script>
 </body>
 </html>
