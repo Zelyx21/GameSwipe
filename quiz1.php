@@ -1,7 +1,12 @@
 <?php
 session_start();
-require 'db.php';
-$user_id = $_SESSION['user_id'] ?? null;
+if (empty($_SESSION['token'])) {
+    $_SESSION['token'] = bin2hex(random_bytes(32));
+    $token = $_SESSION['token'];
+} else {
+    $token = $_SESSION['token'];
+}
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $selectedGenres = $_POST['genres'] ?? [];
@@ -11,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([$user_id, $genre]);
     }
 
-    // Redirect to next quiz page
     header("Location: quiz2.php");
     exit;
 }
@@ -42,20 +46,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </header>
     <div class="quiz_container">
         <h2 class="quiz_question">À quelle(s) catégorie(s) de jeu ne voulez vous pas jouer ?</h2>
-        <div class="buttons_quiz1">
-            <form method="POST">    
-                <button class="genre_btn">Co-op</button>
-                <button class="genre_btn">Solo</button>
-                <button class="genre_btn">Multiplayer</button>
-                <button class="genre_btn">Cozy</button>
-                <button class="genre_btn">PVP</button>
-                <button class="genre_btn">MMO</button>
-                <button class="genre_btn">RP</button>
-                <button class="genre_btn">Exploration</button>
-                <button class="genre_btn">Enigme</button>
-                <button class="genre_btn">Sport</button>
-            </form>
+        <form method="POST">
+        <div class="buttons_quiz1">  
+                <button class="genre_btn" type="button" name="genres[]" value="Co-op">Co-op</button>
+                <button class="genre_btn" type="button" name="genres[]" value="Solo">Solo</button>
+                <button class="genre_btn" type="button" name="genres[]" value="Multiplayer">Multiplayer</button>
+                <button class="genre_btn" type="button" name="genres[]" value="MMO">MMO</button>
+                <button class="genre_btn" type="button" name="genres[]" value="VR">VR</button>
         </div>
+        </form>
         <br/>
         <button class="btn-next"><a href="quiz2.html">Suivant</a></button>
     </div>
