@@ -1,20 +1,64 @@
 <?php
 session_start();
+
 if (empty($_SESSION['token'])) {
     $_SESSION['token'] = bin2hex(random_bytes(32));
-    $token = $_SESSION['token'];
-} else {
-    $token = $_SESSION['token'];
+}
+$token = $_SESSION['token'];
+
+$host = "localhost";
+$dbname = "gameswipe"; 
+$username = "root";      
+$password = "";          
+
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Database connection failed: " . $e->getMessage());
 }
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     $selectedGenres = $_POST['genres'] ?? [];
 
-    foreach ($selectedGenres as $genre) {
-        $stmt = $pdo->prepare("INSERT INTO quiz_answers (user_id, question, answer) VALUES (?, 'genre', ?)");
-        $stmt->execute([$user_id, $genre]);
+    $allGenres = [
+        'Co-op' => 'coop',
+        'Solo' => 'solo',
+        'Multiplayer' => 'multiplayer',
+        'MMO' => 'mmo',
+        'VR' => 'vr'
+    ];
+
+    $values = [];
+    foreach ($allGenres as $label => $column) {
+        $values[$column] = in_array($label, $selectedGenres) ? 0 : 1;
     }
+
+    $stmt = $pdo->prepare("
+        INSERT INTO quiz_genres (id_client, coop, solo, multiplayer, mmo, vr)
+        VALUES (:id_client, :coop, :solo, :multiplayer, :mmo, :vr)
+        ON DUPLICATE KEY UPDATE
+            coop = VALUES(coop),
+            solo = VALUES(solo),
+            multiplayer = VALUES(multiplayer),
+            mmo = VALUES(mmo),
+            vr = VALUES(vr)
+    ");
+
+    $id_client = $_SESSION['id_client'] ?? null;
+    if (!$id_client) {
+        die("Erruer : Utilisateur non connecté.");
+    }
+
+    $stmt->execute([
+        ':id_client' => $id_client,
+        ':coop' => $values['coop'],
+        ':solo' => $values['solo'],
+        ':multiplayer' => $values['multiplayer'],
+        ':mmo' => $values['mmo'],
+        ':vr' => $values['vr']
+    ]);
 
     header("Location: quiz2.php");
     exit;
@@ -54,17 +98,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button class="genre_btn" type="button" name="genres[]" value="MMO">MMO</button>
                 <button class="genre_btn" type="button" name="genres[]" value="VR">VR</button>
         </div>
+                <button class="btn-next" type="submit">Suivant</button>
         </form>
         <br/>
-        <button class="btn-next"><a href="quiz2.html">Suivant</a></button>
     </div>
 
         <script>
              // javascript pour selectionner plusieurs boutons
             const genreButtons = document.querySelectorAll('.genre_btn');
+            const form = document.querySelector('form');
+
             genreButtons.forEach(button => {
                 button.addEventListener('click', () => {
-                button.classList.toggle('selected');
+                    button.classList.toggle('selected');
+
+                    const inputClass = 'hiddenInput-' + button.value;
+
+                    if (button.classList.contains('selected')) {
+                        const input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = 'genres[]';
+                        input.value = button.value;
+                        input.classList.add(inputClass);
+                        form.appendChild(input);
+
+                    } else {
+                        const existingInput = document.querySelector('.' + inputClass);
+                        if (existingInput) existingInput.remove();
+                    }
                 });
             });
         </script>
