@@ -1,0 +1,77 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Kanit', sans-serif;
+}
+
+body {
+    background-color: #1A183B;
+    color: white;
+    min-height: 100vh;
+}
+
+/* Top bar */
+.top_bar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 10vh;
+    background-color: #493C60;
+    padding: 0 2%;
+    gap: 1%;
+}
+
+.top_bar a img {
+    height: 80%;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.top_bar a img:hover {
+    transform: scale(1.1);
+}
+
+/* Grille bibliothèque */
+.library-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Carte individuelle */
+.library-card {
+    background: linear-gradient(135deg,#6a00f4,#9e00ff);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: transform 0.3s;
+}
+
+.library-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.library-card h3 {
+    margin: 10px;
+    font-size: 1.2rem;
+}
+
+.library-card p {
+    margin: 0 10px 10px 10px;
+    font-size: 0.9rem;
+}
+
+/* Hover effet */
+.library-card:hover {
+    transform: scale(1.05);
+}
