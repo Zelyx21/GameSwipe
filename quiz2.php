@@ -1,5 +1,10 @@
 <?php
 session_start();
+$_SESSION['id_client'] = 1;
+if (empty($_SESSION['token'])) {
+    $_SESSION['token'] = bin2hex(random_bytes(32));
+}
+$token = $_SESSION['token'];
 
 $host = "localhost";
 $dbname = "gameswipe"; 
@@ -98,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
     </div>
     <div class="bottom_bar"></div>
-    
+
     <script>
         const buttons = document.querySelectorAll('.genre_btn');
         const form = document.querySelector('form');

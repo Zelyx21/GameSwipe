@@ -1,5 +1,10 @@
 <?php
 session_start();
+$_SESSION['id_client'] = 1;
+if (empty($_SESSION['token'])) {
+    $_SESSION['token'] = bin2hex(random_bytes(32));
+}
+$token = $_SESSION['token'];
 
 $host = "localhost";
 $dbname = "gameswipe"; 
@@ -12,11 +17,7 @@ try {
 } catch (PDOException $e) {
     die("Erreur connexion DB : " . $e->getMessage());
 }
-    $id_client = $_SESSION['id_client'] ?? null;
 
-    if (!$id_client) {
-        die("Erreur : Utilisateur non connecté.");
-    }
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $selectedAge = $_POST['genres'] ?? null;
 
@@ -41,7 +42,13 @@ try {
                 plus_de_13_ans = VALUES(plus_de_13_ans),
                 plus_de_18_ans = VALUES(plus_de_18_ans)
         ");
-        $stmt->execute([$user_id, $moins, $plus13, $plus18]);
+
+    $id_client = $_SESSION['id_client'] ?? null;
+    if (!$id_client) {
+        die("Erreur : Utilisateur non connecté.");
+    }
+
+        $stmt->execute([$id_client, $moins, $plus13, $plus18]);
     }
 
     header("Location: quiz1.php");

@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION['id_client'] = 1;
 
 if (empty($_SESSION['token'])) {
     $_SESSION['token'] = bin2hex(random_bytes(32));
@@ -25,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $allGenres = [
         'Co-op' => 'coop',
         'Solo' => 'solo',
-        'Multiplayer' => 'multiplayer',
+        'Multiplayer' => 'multi',
         'MMO' => 'mmo',
         'VR' => 'vr'
     ];
@@ -36,12 +37,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $stmt = $pdo->prepare("
-        INSERT INTO quiz_genres (id_client, coop, solo, multiplayer, mmo, vr)
-        VALUES (:id_client, :coop, :solo, :multiplayer, :mmo, :vr)
+        INSERT INTO quest1 (id_client, solo, coop, multi, mmo, vr)
+        VALUES (:id_client, :solo, :coop, :multi, :mmo, :vr)
         ON DUPLICATE KEY UPDATE
-            coop = VALUES(coop),
             solo = VALUES(solo),
-            multiplayer = VALUES(multiplayer),
+            coop = VALUES(coop),
+            multi = VALUES(multi),
             mmo = VALUES(mmo),
             vr = VALUES(vr)
     ");
@@ -53,9 +54,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $stmt->execute([
         ':id_client' => $id_client,
-        ':coop' => $values['coop'],
         ':solo' => $values['solo'],
-        ':multiplayer' => $values['multiplayer'],
+        ':coop' => $values['coop'],
+        ':multi' => $values['multi'],
         ':mmo' => $values['mmo'],
         ':vr' => $values['vr']
     ]);
