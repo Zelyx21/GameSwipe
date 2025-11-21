@@ -48,7 +48,14 @@ session_start();
     </header>
 
     <?php include 'burger.php'; ?>
+    
+    <div class="card-container">
+        <div class="card-wrapper" id="card-stack">
+            <!-- Cartes injectées via JS -->
+        </div>
+    </div>
 
+    <script src="flip_swipe_card.js"></script>
 </body>
-
 </html>
+
