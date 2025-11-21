@@ -1,4 +1,7 @@
 <style>
+    .a {
+        font: Kannitu,sans-serif;
+    }
     .burger_bar {
         position: relative; /* parent du menu */
     }

@@ -1,9 +1,28 @@
+<?php
+    session_start();
+
+    if(!isset($_SESSION["client"])){
+        header("Location: connexion.php");
+        exit;
+    }
+
+    if(!isset($_SESSION['token'])) {
+        $_SESSION['token'] = bin2hex(random_bytes(32));
+    }
+    $token = $_SESSION['token'];
+
+    $nom = $_SESSION["client"]["nom"];
+    $mail = $_SESSION["client"]["mail"];
+?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/modification_compte.js"></script>
     <title>Profil</title>
 
     <style>
@@ -177,7 +196,15 @@
 <body>
     <header>
         <div class="top_bar">
-            <button class="gameswipe"><a href="accueil.php">GameSwipe</a></button>
+            <div class="left_group">
+                <div class="gameswipe">
+                    <a href="accueil.php"><img src="logo/boutons/Nom=GameSwipe, Etat=Normal.svg" alt="GameSwipe"
+                            class="gameswipe"></a>
+                </div>
+                <div class="boutons_compte">
+                    <a id="deconnecter"><img src="logo/boutons/Nom=Déconnecter, Etat=Normal.svg" alt="Deconnecter" class="deconnecter"></a>
+                    </div>
+            </div>
         </div>
     </header>
 
@@ -191,36 +218,39 @@
             </div>
         </div>
         <div class="profile-welcome">
-            <h3>Bienvenue Dodo</h3>
+            <h3>Bienvenue <?php echo $nom; ?></h3>
         </div>
     </div>
 
     <div class="profile-modif">
         <div class="column">
-            <label for="username">Nom d’utilisateur</label>
+            <form id="formulaire">
+                <label for="username">Nom d’utilisateur</label>
 
-            <div class="bouton-input-modif">
-                <input type="text" id="username" value="Dodo" readonly>
-                <button class="btn_secondaire">Modifier</button>
-            </div>
+                <div class="bouton-input-modif">
+                    <input type="text" id="username" name="nom" value="<?php echo $nom; ?>" readonly>
+                    <button type="button" class="btn bouton-modif">Modifier</button>
+                </div>
 
-            <label for="email">Adresse e-mail</label>
+                <label for="email">Adresse e-mail</label>
 
-            <div class="bouton-input-modif">
-                <input type="email" id="email" value="dodo.dodo@gmail.com" readonly>
-                <button class="btn_secondaire">Modifier</button>
-            </div>
+                <div class="bouton-input-modif">
+                    <input type="email" id="email" name="mail" value="<?php echo $mail; ?>" readonly>
+                    <button type="button" class="btn bouton-modif">Modifier</button>
+                </div>
 
-            <label for="password">Mot de passe</label>
+                <label for="password">Mot de passe</label>
 
-            <div class="bouton-input-modif">
-                <input type="password" id="password" value="************" readonly>
-                <button class="btn_secondaire">Modifier</button>
-            </div>
+                <div class="bouton-input-modif">
+                    <input type="password" id="password" name="mdp" value="********" readonly>
+                    <button type="button" class="btn bouton-modif">Modifier</button>
+                </div>
+                <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
+            </form>
         </div>
         <div class="column">
             <div class="bouton-input-modif">
-                <button class="btn_secondaire">Réeffectuer le <br> questionnaire</button>
+                <button type="button" class="btn-autre bouton-modif">Réeffectuer le <br> questionnaire</button>
                 <p>Réeffectue le questionnaire de préférence</p>
             </div>
 
