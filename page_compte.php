@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Profil</title>
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            /* empile header et .profile-modif */
+            min-height: 100vh;
+            /* s'assure que le body prend tout l'écran */
+        }
+
+        /* Profil image et premier div */
+        h3 {
+            color: #fff;
+        }
+
+        .profile-header {
+            background-color: #1b1b3a;
+            text-align: center;
+            padding: 3em 1em 1em 1em;
+        }
+
+        .profile-header h1 {
+            margin: 0;
+            font-size: 2em;
+            color: #9d87e8;
+            margin-bottom: 0;
+        }
+
+        .profile-avatar {
+            margin-top: 0;
+            position: relative;
+            display: inline-block;
+            margin-top: -6em;
+        }
+
+        .profile-avatar img {
+            width: 200px;
+            /* largeur plus grande */
+            height: 200px;
+            /* hauteur plus grande */
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+        }
+
+        .profile-avatar .camera-icon {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: #fff;
+            border-radius: 50%;
+            padding: 5px;
+        }
+
+        .profile-avatar .camera-icon img {
+            width: 30px;
+            height: 30px;
+            display: block;
+        }
+
+        .profile-welcome {
+            margin-top: 0.5em;
+            font-size: 1.2em;
+        }
+
+
+
+        /* Boutons */
+        button {
+            font-size: 1em;
+        }
+
+        .btn {
+            padding: 0.7em 1em;
+            border-radius: 10px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 0.5em;
+        }
+
+
+        .btn-red {
+            padding: 12px 28px;
+            background-color: #c72424ff;
+            border: none;
+            border-radius: 20px;
+            color: #fff;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 2%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: 0.2s;
+        }
+
+        .btn-red:hover {
+            background-color: #e58787ff;
+        }
+
+
+
+        /* div des modifs */
+        .profile-modif {
+            display: flex;
+            flex-direction: row;
+            flex: 1;
+            /* prend tout l’espace restant sous le header */
+            background-color: #CFBFEE;
+            display: flex;
+            /* active flexbox pour aligner les colonnes */
+            gap: 2%;
+            /* espace entre les colonnes */
+            width: 100%;
+            /* prend toute la largeur de l’écran */
+            box-sizing: border-box;
+            /* inclut padding et bordures dans la largeur */
+        }
+
+        .profile-modif .column {
+            flex: 1;
+            /* chaque colonne prend la même largeur */
+            min-width: 0;
+            /* pour éviter le débordement des contenus */
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            margin-top: 2%;
+            margin-left: 5%;
+            margin-right: 5%;
+            gap: 2%;
+        }
+
+        .profile-modif .column:nth-child(2) {
+            gap: 6%;
+        }
+
+        .profile-modif input {
+            padding: 1em;
+            font-size: 1em;
+            border-radius: 10px;
+            border: none;
+            margin-right: 1em;
+            width: 30em;
+        }
+
+        .bouton-input-modif {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        label {
+            color: #101010;
+            font-size: 1.2em;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="top_bar">
+            <button class="gameswipe"><a href="accueil.php">GameSwipe</a></button>
+        </div>
+    </header>
+
+    <?php include 'burger.php'; ?>
+
+    <div class="profile-header">
+        <div class="profile-avatar">
+            <img src="../Donia/image/brocciu.jpg" alt="Avatar Dodo">
+            <div class="camera-icon">
+                <img src="logo/photo.svg" alt="Camera" width="25">
+            </div>
+        </div>
+        <div class="profile-welcome">
+            <h3>Bienvenue Dodo</h3>
+        </div>
+    </div>
+
+    <div class="profile-modif">
+        <div class="column">
+            <label for="username">Nom d’utilisateur</label>
+
+            <div class="bouton-input-modif">
+                <input type="text" id="username" value="Dodo" readonly>
+                <button class="btn_secondaire">Modifier</button>
+            </div>
+
+            <label for="email">Adresse e-mail</label>
+
+            <div class="bouton-input-modif">
+                <input type="email" id="email" value="dodo.dodo@gmail.com" readonly>
+                <button class="btn_secondaire">Modifier</button>
+            </div>
+
+            <label for="password">Mot de passe</label>
+
+            <div class="bouton-input-modif">
+                <input type="password" id="password" value="************" readonly>
+                <button class="btn_secondaire">Modifier</button>
+            </div>
+        </div>
+        <div class="column">
+            <div class="bouton-input-modif">
+                <button class="btn_secondaire">Réeffectuer le <br> questionnaire</button>
+                <p>Réeffectue le questionnaire de préférence</p>
+            </div>
+
+            <div class="bouton-input-modif">
+                <button class="btn_secondaire">Supprimer <br> l’historique de mon <br> compte</button>
+                <p>Supprime l'historique des jeux que vous avez Love, Like et Dislike</p>
+            </div>
+
+            <div class="bouton-input-modif">
+                <button class="btn-red">Supprimer mon <br> compte</button>
+                <p class="warning">Cette action est irréversible</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.bouton-input-modif').forEach(div => {
+            const input = div.querySelector('input');
+            const btn = div.querySelector('button');
+
+            btn.addEventListener('click', () => {
+                if (input.hasAttribute('readonly')) {
+                    input.removeAttribute('readonly');   // rendre modifiable
+                    input.focus();                        // place le curseur dedans
+                    btn.textContent = 'Enregistrer';     // change le texte du bouton
+                } else {
+                    input.setAttribute('readonly', true); // verrouille à nouveau
+                    btn.textContent = 'Modifier';
+                    // Ici tu peux ajouter un code pour sauvegarder la valeur si besoin
+                    console.log(`${input.id} mis à jour : ${input.value}`);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
