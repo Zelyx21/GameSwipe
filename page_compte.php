@@ -16,18 +16,18 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html>
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/jquery.js"></script>
     <script src="js/modification_compte.js"></script>
     <title>Profil</title>
 
     <style>
-
-        html, body {
+        html,
+        body {
             height: 100%;
             margin: 0;
             padding: 0;
@@ -35,12 +35,14 @@
 
         body {
             display: flex;
-            flex-direction: column; /* empile header et .profile-modif */
-            min-height: 100vh;      /* s'assure que le body prend tout l'écran */
+            flex-direction: column;
+            /* empile header et .profile-modif */
+            min-height: 100vh;
+            /* s'assure que le body prend tout l'écran */
         }
 
         /* Profil image et premier div */
-        h3{
+        h3 {
             color: #fff;
         }
 
@@ -65,11 +67,13 @@
         }
 
         .profile-avatar img {
-            width: 200px;   /* largeur plus grande */
-            height: 200px;  /* hauteur plus grande */
+            width: 200px;
+            /* largeur plus grande */
+            height: 200px;
+            /* hauteur plus grande */
             border-radius: 50%;
             object-fit: cover;
-            box-shadow: 0 0 15px rgba(0,0,0,0.6);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
         }
 
         .profile-avatar .camera-icon {
@@ -92,10 +96,10 @@
             font-size: 1.2em;
         }
 
-        
+
 
         /* Boutons */
-        button{
+        button {
             font-size: 1em;
         }
 
@@ -108,56 +112,52 @@
             margin-top: 0.5em;
         }
 
-        .btn-autre {
-            padding: 0.7em 1em;
-            border-radius: 10px;
+
+        .btn-red {
+            padding: 12px 28px;
+            background-color: #c72424ff;
             border: none;
-            font-weight: 600;
+            border-radius: 20px;
+            color: #fff;
+            font-size: 17px;
+            font-weight: bold;
             cursor: pointer;
-            margin-top: 0.5em;
-            min-width: 43%; /* taille fixe harmonisée */
-            min-height: 10%; /* même hauteur */
-            margin-right: 5%;
+            margin-top: 2%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: 0.2s;
         }
 
-        .bouton-modif {
-            background-color: #6a44c3;
-            color: #fff;
-        }
-
-        .bouton-red {
-            background-color: #e74c3c;
-            color: #fff;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-        }
-
-        .btn-autre:hover {
-            opacity: 0.9;
+        .btn-red:hover {
+            background-color: #e58787ff;
         }
 
 
 
         /* div des modifs */
-        .profile-modif{
+        .profile-modif {
             display: flex;
             flex-direction: row;
-            flex: 1;                 /* prend tout l’espace restant sous le header */
+            flex: 1;
+            /* prend tout l’espace restant sous le header */
             background-color: #CFBFEE;
-            display: flex;           /* active flexbox pour aligner les colonnes */
-            gap: 2%;                 /* espace entre les colonnes */
-            width: 100%;             /* prend toute la largeur de l’écran */
-            box-sizing: border-box;  /* inclut padding et bordures dans la largeur */
+            display: flex;
+            /* active flexbox pour aligner les colonnes */
+            gap: 2%;
+            /* espace entre les colonnes */
+            width: 100%;
+            /* prend toute la largeur de l’écran */
+            box-sizing: border-box;
+            /* inclut padding et bordures dans la largeur */
         }
 
         .profile-modif .column {
-            flex: 1;                 /* chaque colonne prend la même largeur */
-            min-width: 0;            /* pour éviter le débordement des contenus */
+            flex: 1;
+            /* chaque colonne prend la même largeur */
+            min-width: 0;
+            /* pour éviter le débordement des contenus */
         }
 
-        .column{
+        .column {
             display: flex;
             flex-direction: column;
             margin-top: 2%;
@@ -179,20 +179,20 @@
             width: 30em;
         }
 
-        .bouton-input-modif{
+        .bouton-input-modif {
             display: flex;
             flex-direction: row;
             align-items: center;
         }
 
-        label{
+        label {
             color: #101010;
             font-size: 1.2em;
             font-weight: 500;
         }
-
     </style>
 </head>
+
 <body>
     <header>
         <div class="top_bar">
@@ -255,16 +255,36 @@
             </div>
 
             <div class="bouton-input-modif">
-                <button type="button" class="btn-autre bouton-modif">Supprimer <br> l’historique de mon <br> compte</button>
+                <button class="btn_secondaire">Supprimer <br> l’historique de mon <br> compte</button>
                 <p>Supprime l'historique des jeux que vous avez Love, Like et Dislike</p>
             </div>
 
             <div class="bouton-input-modif">
-                <button type="button" class="btn-autre bouton-red">Supprimer mon <br> compte</button>
+                <button class="btn-red">Supprimer mon <br> compte</button>
                 <p class="warning">Cette action est irréversible</p>
             </div>
         </div>
     </div>
 
+    <script>
+        document.querySelectorAll('.bouton-input-modif').forEach(div => {
+            const input = div.querySelector('input');
+            const btn = div.querySelector('button');
+
+            btn.addEventListener('click', () => {
+                if (input.hasAttribute('readonly')) {
+                    input.removeAttribute('readonly');   // rendre modifiable
+                    input.focus();                        // place le curseur dedans
+                    btn.textContent = 'Enregistrer';     // change le texte du bouton
+                } else {
+                    input.setAttribute('readonly', true); // verrouille à nouveau
+                    btn.textContent = 'Modifier';
+                    // Ici tu peux ajouter un code pour sauvegarder la valeur si besoin
+                    console.log(`${input.id} mis à jour : ${input.value}`);
+                }
+            });
+        });
+    </script>
 </body>
+
 </html>
