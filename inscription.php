@@ -1,6 +1,7 @@
 <?php
-session_start();
-$_SESSION['token'] = bin2hex(random_bytes(32));
+    session_start();
+    $_SESSION["token"] = bin2hex(random_bytes(32));
+    $token = $_SESSION["token"];
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +47,7 @@ $_SESSION['token'] = bin2hex(random_bytes(32));
                     <input type="password" id="mdp2" name="mdp2" required>
                     <p id="message_mdp2"></p>
 
-                    <input type="hidden" id="token" name="token" value="<?php echo $_SESSION['token']; ?>">
+                    <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
 
                     <a href="connexion.php" class="btn_secondaire">Se connecter</a>
                     <button type="submit" id="btn_submit">S'inscrire</button>
