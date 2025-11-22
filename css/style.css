@@ -20,6 +20,7 @@ h2 {
     color: #000;
     margin-top: 18px;
     margin-bottom: 12px;
+    text-align:center;
 }
 
 a {
@@ -458,19 +459,56 @@ body.burger-bg .burger_bar {
     margin-bottom: 20px;
 }
 
-.bloc_filtre{
+
+.filtre-header{ /*pour avoir le ptit bouton à droite*/
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    width:100%;
+}
+.bloc_filtre {
     background: #5a4180;
     margin-bottom: 12px;
     padding: 15px;
     border-radius: 10px;
     color: #e2d6ff;
-    font-size: 20px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.bloc_filtre.open {
+    background: #7b5da3; /* couleur quand ouvert */
+}
+
+.filtre-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    cursor: pointer;
+    font-weight: bold;
 }
 
-.bloc_filtre span{
-    opacity:0.8;
+.arrow {
+    transition: transform 0.3s;
+}
+
+.bloc_filtre.open .arrow {
+    transform: rotate(180deg);
+}
+
+.filtre-options {
+    display: none;
+    margin-top: 10px;
+    padding-left: 10px;
+}
+
+.bloc_filtre.open .filtre-options {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap:10px;
+}
+
+.filtre-options label {
+    display: block;
+    margin-bottom: 5px;
 }

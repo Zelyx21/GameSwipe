@@ -21,15 +21,53 @@ session_start();
             <h2 class="titre-sidebar">Filtres</h2>
 
             <div class="bloc_filtre">
-                <div class="filtre-header">Filtre <span>▼</span></div>
+                <div class="filtre-header">Catégorie<span class="arrow">▲</span></div>
+                <div class="filtre-options">
+                    <label><input type="checkbox"> Tag</label>
+                    <label><input type="checkbox"> Tag</label>
+                    <label><input type="checkbox"> Tag</label>
+                    <label><input type="checkbox"> Tag</label>
+                    <label><input type="checkbox"> Tag</label>
+                    <label><input type="checkbox"> Tag</label>
+                    <label><input type="checkbox"> Tag</label>
+                    <label><input type="checkbox"> Tag</label>
+                </div>
             </div>
 
             <div class="bloc_filtre">
-                <div class="filtre-header">Filtre <span>▼</span></div>
+                <div class="filtre-header">Genre<span class="arrow">▲</span></div>
+                <div class="filtre-options">
+                    <label><input type="checkbox"> Tag</label>
+                    <label><input type="checkbox"> Tag</label>
+                    <label><input type="checkbox"> Tag</label>
+                    <label><input type="checkbox"> Tag</label>
+                    <label><input type="checkbox"> Tag</label>
+                    <label><input type="checkbox"> Tag</label>
+                    <label><input type="checkbox"> Tag</label>
+                    <label><input type="checkbox"> Tag</label>
+                </div>
             </div>
 
             <div class="bloc_filtre">
-                <div class="filtre-header">Filtre <span>▼</span></div>
+                <div class="filtre-header">Tag<span class="arrow">▲</span></div>
+                <div class="filtre-options">
+                    <label><input type="checkbox"> Tag</label>
+                    <label><input type="checkbox"> Tag</label>
+                    <label><input type="checkbox"> Tag</label>
+                    <label><input type="checkbox"> Tag</label>
+                    <label><input type="checkbox"> Tag</label>
+                    <label><input type="checkbox"> Tag</label>
+                    <label><input type="checkbox"> Tag</label>
+                    <label><input type="checkbox"> Tag</label>
+                </div>
+            </div>
+            <div class="bloc_filtre">
+                <div class="filtre-header">Système d'exploitation<span class="arrow">▲</span></div>
+                <div class="filtre-options">
+                    <label><input type="checkbox">Windows</label>
+                    <label><input type="checkbox">Mac</label>
+                    <label><input type="checkbox">Linux</label>
+                </div>
             </div>
         </div>
         <div class="top_bar">
