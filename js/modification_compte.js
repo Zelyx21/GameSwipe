@@ -2,23 +2,31 @@ $(document).ready(function(){
 
     var emailDejaValide = false;
 
+    // Sélectionne toutes les div qui contiennent un input et un bouton pour modification
     document.querySelectorAll('.bouton-input-modif').forEach(div => {
+        // Récupère l'input puis le bouton à l'intérieur de la div
         const input = div.querySelector('input');
         const btn = div.querySelector('button');
 
+        // Evénement sur le bouton
         btn.addEventListener('click', (e) => {
+
             e.preventDefault();
 
+            // Vérifie si l'input est en lecture seule
             if(input.hasAttribute('readonly')) {
                 input.removeAttribute('readonly');
                 input.focus();
                 btn.textContent = 'Enregistrer';
+
+            // Ou s'il est en train d'être modifié
             } else {
                 input.setAttribute('readonly', true);
                 btn.textContent = 'Modifier';
 
                 const value = input.value.trim();
 
+                // Vérifie que la valeur ne soit pas nulle
                 if(value === "") {
                     alert("Le champ ne peut pas être vide !");
                     input.removeAttribute('readonly');
@@ -96,6 +104,7 @@ $(document).ready(function(){
                         success: function(response) {
                             if(response === "1"){
                                 alert("Modification enregistrée !");
+                                window.location.href = "page_compte.php";
                             } else {
                                 alert("Erreur : " + response);
                             }
