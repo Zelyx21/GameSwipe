@@ -1,6 +1,6 @@
 <?php
 session_start();
-$_SESSION['id_client'] = 1;
+
 if (empty($_SESSION['token'])) {
     $_SESSION['token'] = bin2hex(random_bytes(32));
 }
