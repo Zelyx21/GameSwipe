@@ -344,9 +344,6 @@ body.burger-bg .burger_bar {
     box-shadow: 0 1% 3% rgba(0,0,0,0.4);
 }
 
-    height: 14%;
-}
-
 /*questionnaire*/
 .buttons_quiz1 {
   display: flex;
@@ -412,4 +409,68 @@ body.burger-bg .burger_bar {
   background-color: #5B328A;
   color: white;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+
+
+/*FILTRES*/
+
+#overlay_filtres{
+    position: fixed;
+    top : 0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(28, 17, 58, 0.54);
+    opacity:0;
+    pointer-events:none; /*ne bloque pas les clics*/
+    transition:0.3s;
+    z-index:900; /*met l'overlay au dessus du site mais sous la barre des filtres*/
+}
+
+#overlay_filtres.active{
+    opacity:1;
+    pointer-events:auto; /*bloque les clics*/
+}
+
+#sidebar_filtres{
+    position: fixed;
+    top: 0;
+    right: -410px; /*en dehors de l'écran quand pas actif*/
+    width: 350px;
+    height: 100%; /*prend la hauteur de l'écran*/
+    background: #2a1f3b;
+    border-left: 2px solid #7a52ff30;
+    box-shadow: -4px 0 12px rgba(0,0,0,0.5); /*ombre à gauche*/
+    padding: 25px; /*espace intérieur à gauche et droite*/
+    transition: 0.3s; /*la sidebar glisse*/
+    z-index: 1000; /*la barre est au dessus de tout dans le site*/
+    overflow-y: auto; /*quand contenu trop long on peut scroll*/
+}
+
+#sidebar_filtres.active{
+    right:0; /*fait apparaître la barre*/
+}
+
+.titre_sidebar{
+    color: #d1c3ff;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.bloc_filtre{
+    background: #5a4180;
+    margin-bottom: 12px;
+    padding: 15px;
+    border-radius: 10px;
+    color: #e2d6ff;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.bloc_filtre span{
+    opacity:0.8;
 }

@@ -8,13 +8,30 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-        <script src="js/jquery.js"></script>
+    <script src="js/jquery.js"></script>
     <script src="js/deconnecter.js"></script>
+    <script src="js/filtre.js"></script>
     <title>GameSwipe</title>
 </head>
 
 <body>
     <header>
+        <div id="overlay_filtres"></div> <!-- assombrit la page quand filtres activé -->
+        <div id="sidebar_filtres">
+            <h2 class="titre-sidebar">Filtres</h2>
+
+            <div class="bloc_filtre">
+                <div class="filtre-header">Filtre <span>▼</span></div>
+            </div>
+
+            <div class="bloc_filtre">
+                <div class="filtre-header">Filtre <span>▼</span></div>
+            </div>
+
+            <div class="bloc_filtre">
+                <div class="filtre-header">Filtre <span>▼</span></div>
+            </div>
+        </div>
         <div class="top_bar">
             <div class="left_group">
                 <div class="gameswipe">
@@ -48,14 +65,13 @@ session_start();
     </header>
 
     <?php include 'burger.php'; ?>
-    
+
     <div class="card-container">
         <div class="card-wrapper" id="card-stack">
             <!-- Cartes injectées via JS -->
         </div>
     </div>
-
-    <script src="flip_swipe_card.js"></script>
 </body>
-</html>
+<script src="js/flip_swipe_card.js"></script>
 
+</html>
