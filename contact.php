@@ -8,31 +8,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery.js"></script>
     <title>GameSwipe</title>
 
-    <style>
-        .burger_bar_contact {
-            display: flex;
-            background-color: #3C2C59;
-            align-items: center;
-            position: relative;
-        }
-
-        .text_contact {
-            margin-left: 7.5em;
-            margin-right: 7.5em;
-            font-size: 1.8em;
-            line-height: 1.6;
-            color: #8874DF;
-            margin-top: 1em;
-            text-indent: 2em;
-        }
-
-        .text_contact.intro {
-            display: block;
-            text-align: center;
-        }
-    </style>
 
 </head>
 
