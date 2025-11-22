@@ -20,47 +20,60 @@ session_start();
         <div id="sidebar_filtres">
             <h2 class="titre-sidebar">Filtres</h2>
 
+                        <div class="bloc_filtre">
+                <div class="filtre-header">Prix<span class="arrow">▲</span></div>
+                <div class="filtre-options">
+                    <label><input type="checkbox">Gratuit</label>
+                    <label><input type="checkbox">1-10 euros</label>
+                    <label><input type="checkbox">11-20 euros</label>
+                    <label><input type="checkbox">21-40 euros</label>
+                    <label><input type="checkbox">41-70 euros</label>
+                    <label><input type="checkbox">>70 euros</label>
+                </div>
+            </div>
+
             <div class="bloc_filtre">
                 <div class="filtre-header">Catégorie<span class="arrow">▲</span></div>
                 <div class="filtre-options">
-                    <label><input type="checkbox"> Tag</label>
-                    <label><input type="checkbox"> Tag</label>
-                    <label><input type="checkbox"> Tag</label>
-                    <label><input type="checkbox"> Tag</label>
-                    <label><input type="checkbox"> Tag</label>
-                    <label><input type="checkbox"> Tag</label>
-                    <label><input type="checkbox"> Tag</label>
-                    <label><input type="checkbox"> Tag</label>
+                    <label><input type="Solo"> Tag</label>
+                    <label><input type="Coop"> Tag</label>
+                    <label><input type="Multijoueur/PvP"> Tag</label>
+                    <label><input type="MMO"> Tag</label>
+                    <label><input type="VR"> Tag</label>
                 </div>
             </div>
 
             <div class="bloc_filtre">
                 <div class="filtre-header">Genre<span class="arrow">▲</span></div>
                 <div class="filtre-options">
-                    <label><input type="checkbox"> Tag</label>
-                    <label><input type="checkbox"> Tag</label>
-                    <label><input type="checkbox"> Tag</label>
-                    <label><input type="checkbox"> Tag</label>
-                    <label><input type="checkbox"> Tag</label>
-                    <label><input type="checkbox"> Tag</label>
-                    <label><input type="checkbox"> Tag</label>
-                    <label><input type="checkbox"> Tag</label>
+                    <label><input type="checkbox">Comptabilité</label>
+                    <label><input type="checkbox">Action</label>
+                    <label><input type="checkbox">Aventure</label>
+                    <label><input type="checkbox">Animation & Modélisation</label>
+                    <label><input type="checkbox">Production Audio</label>
+                    <label><input type="checkbox">Casual</label>
+                    <label><input type="checkbox">Design & Illustration</label>
+                    <label><input type="checkbox">Accès anticipé</label>
+                    <label><input type="checkbox">Éducation</label>
+                    <label><input type="checkbox">Développement de jeux</label>
+                    <label><input type="checkbox">Gore</label>
+                    <label><input type="checkbox">Indépendant</label>
+                    <label><input type="checkbox">Nudité</label>
+                    <label><input type="checkbox">Retouche photo</label>
+                    <label><input type="checkbox">RPG</label>
+                    <label><input type="checkbox">Course</label>
+                    <label><input type="checkbox">Contenu sexuel</label>
+                    <label><input type="checkbox">Simulation</label>
+                    <label><input type="checkbox">Formation logicielle</label>
+                    <label><input type="checkbox">Sports</label>
+                    <label><input type="checkbox">Stratégie</label>
+                    <label><input type="checkbox">Utilitaires</label>
+                    <label><input type="checkbox">Production vidéo</label>
+                    <label><input type="checkbox">Violence</label>
+                    <label><input type="checkbox">Publication Web</label>
                 </div>
             </div>
 
-            <div class="bloc_filtre">
-                <div class="filtre-header">Tag<span class="arrow">▲</span></div>
-                <div class="filtre-options">
-                    <label><input type="checkbox"> Tag</label>
-                    <label><input type="checkbox"> Tag</label>
-                    <label><input type="checkbox"> Tag</label>
-                    <label><input type="checkbox"> Tag</label>
-                    <label><input type="checkbox"> Tag</label>
-                    <label><input type="checkbox"> Tag</label>
-                    <label><input type="checkbox"> Tag</label>
-                    <label><input type="checkbox"> Tag</label>
-                </div>
-            </div>
             <div class="bloc_filtre">
                 <div class="filtre-header">Système d'exploitation<span class="arrow">▲</span></div>
                 <div class="filtre-options">
