@@ -229,28 +229,28 @@
 
                 <div class="bouton-input-modif">
                     <input type="text" id="username" name="nom" value="<?php echo $nom; ?>" readonly>
-                    <button type="button" class="btn bouton-modif">Modifier</button>
+                    <button type="button" class="btn_secondaire">Modifier</button>
                 </div>
 
                 <label for="email">Adresse e-mail</label>
 
                 <div class="bouton-input-modif">
                     <input type="email" id="email" name="mail" value="<?php echo $mail; ?>" readonly>
-                    <button type="button" class="btn bouton-modif">Modifier</button>
+                    <button type="button" class="btn_secondaire">Modifier</button>
                 </div>
 
                 <label for="password">Mot de passe</label>
 
                 <div class="bouton-input-modif">
                     <input type="password" id="password" name="mdp" value="********" readonly>
-                    <button type="button" class="btn bouton-modif">Modifier</button>
+                    <button type="button" class="btn_secondaire">Modifier</button>
                 </div>
                 <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
             </form>
         </div>
         <div class="column">
             <div class="bouton-input-modif">
-                <button type="button" class="btn-autre bouton-modif">Réeffectuer le <br> questionnaire</button>
+                <button type="button" class="btn_secondaire">Réeffectuer le <br> questionnaire</button>
                 <p>Réeffectue le questionnaire de préférence</p>
             </div>
 
