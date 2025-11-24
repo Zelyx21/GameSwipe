@@ -20,7 +20,7 @@ $dislikedGames = [
     <title>Like - GameSwipe</title>
     <link rel="stylesheet" href="css/like_dislike_fav.css">
 </head>
-<body>
+<body class="burger-bg">
     <header>
         <div class="top_bar">
             <a href="accueil.php"><img src="logo/boutons/Nom=GameSwipe, Etat=Normal.svg" alt="GameSwipe"></a>
