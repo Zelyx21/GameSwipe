@@ -44,7 +44,8 @@
     </header>
 
     <?php include 'burger.php'; ?>
-
+    
+    <!-- Affichage de la photo de profil est du nom de l'utilisateur -->
     <div class="profile-header">
         <div class="profile-avatar">
             <img src="../Donia/image/brocciu.jpg" alt="Avatar Dodo">
@@ -57,7 +58,10 @@
         </div>
     </div>
 
+    <!-- Affichage des informations de l'utilisateur et des modifications possibles -->
     <div class="profile-modif">
+
+        <!-- Colonne de gauche -->
         <div class="column">
             <form id="formulaire">
                 <label for="username">Nom d’utilisateur</label>
@@ -83,6 +87,8 @@
                 <input type="hidden" id="token" name="token" value="<?php echo $token; ?>">
             </form>
         </div>
+
+        <!-- Colonne de droite -->
         <div class="column">
             <div class="bouton-input-modif">
                 <button type="button" class="btn_secondaire">Réeffectuer le <br> questionnaire</button>

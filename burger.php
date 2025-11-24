@@ -8,6 +8,6 @@
 
 <div class="burger_menu" id="burgerMenu">
     <a href="page_compte.php">PARAMETRE DU COMPTE</a>
-    <a href="stat.php">STATISTIQUES</a>
+    <a href="page_statistiques.php">STATISTIQUES</a>
     <a href="contact.php">NOTRE EQUIPE</a>
 </div>
