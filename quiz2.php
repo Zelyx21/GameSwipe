@@ -1,25 +1,21 @@
 <?php
-session_start();
-if (empty($_SESSION['token'])) {
-    $_SESSION['token'] = bin2hex(random_bytes(32));
-}
-$token = $_SESSION['token'];
+    session_start();
+    require "fonctions.php";
+    $bdd = getBDD();
 
-$host = "localhost";
-$dbname = "gameswipe"; 
-$username = "root";
-$password = "";
+    if(!isset($_SESSION["client"])) {
+            echo "non connecté";
+            exit;
+        }
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Erreur connexion DB : " . $e->getMessage());
-}
+    if(!isset($_SESSION['token'])) {
+        $_SESSION['token'] = bin2hex(random_bytes(32));
+    }
+    $token = $_SESSION['token'];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $selectedTimes = $_POST['times'] ?? [];
+        $selectedTimes = $_POST['times'] ?? [];
 
     $times = [
         'Moins de 2h' => '2h',
@@ -34,12 +30,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $values[$column] = in_array($label, $selectedTimes) ? 1 : 0;
     }
 
-    $id_client = $_SESSION['id_client'] ?? null;
+    $id_client = $_SESSION['client']['id'] ?? null;
     if (!$id_client) {
         die("Erreur : Utilisateur non connecté.");
     }
 
-    $stmt = $pdo->prepare("
+    $stmt = $bdd->prepare("
         INSERT INTO quest2 (id_client, `2h`, `5h`, `12h`, `30h`, `plus`)
         VALUES (:id_client, :2h, :5h, :12h, :30h, :plus)
         ON DUPLICATE KEY UPDATE

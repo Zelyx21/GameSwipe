@@ -1,22 +1,17 @@
 <?php
-session_start();
+    session_start();
+    require "fonctions.php";
+    $bdd = getBDD();
 
-if (empty($_SESSION['token'])) {
-    $_SESSION['token'] = bin2hex(random_bytes(32));
-}
-$token = $_SESSION['token'];
+    if(!isset($_SESSION["client"])) {
+        echo "non connecté";
+        exit;
+    }
 
-$host = "localhost";
-$dbname = "gameswipe"; 
-$username = "root";
-$password = "";
-
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Erreur connexion DB : " . $e->getMessage());
-}
+    if(!isset($_SESSION['token'])) {
+        $_SESSION['token'] = bin2hex(random_bytes(32));
+    }
+    $token = $_SESSION['token'];
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $selectedAge = $_POST['genres'] ?? null;
@@ -34,7 +29,7 @@ try {
             $plus18 = 1;
         }
 
-        $stmt = $pdo->prepare("
+        $stmt = $bdd->prepare("
             INSERT INTO quest0 (id_client, moins_de_13_ans, plus_de_13_ans, plus_de_18_ans)
             VALUES (?, ?, ?, ?)
             ON DUPLICATE KEY UPDATE
@@ -43,7 +38,7 @@ try {
                 plus_de_18_ans = VALUES(plus_de_18_ans)
         ");
 
-    $id_client = $_SESSION['id_client'] ?? null;
+    $id_client = $_SESSION['client']['id'] ?? null;
     if (!$id_client) {
         die("Erreur : Utilisateur non connecté.");
     }

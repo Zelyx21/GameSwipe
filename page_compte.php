@@ -85,7 +85,7 @@
         </div>
         <div class="column">
             <div class="bouton-input-modif">
-                <button type="button" class="btn_secondaire">Réeffectuer le <br> questionnaire</button>
+                <button type="button" id="reset-quiz" class="btn_secondaire">Réeffectuer le <br> questionnaire</button>
                 <p>Réeffectue le questionnaire de préférence</p>
             </div>
 
@@ -102,5 +102,9 @@
     </div>
 
 </body>
-
+<script>
+    document.getElementById("reset-quiz").addEventListener("click", function(){
+        window.location.href = "reset_quiz.php";
+    });
+</script>
 </html>
