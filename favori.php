@@ -8,13 +8,13 @@ $client_id = $_SESSION['client']['id'];
 
 require 'database.php';
 
-// Récupérer les jeux likés
+// Récupérer les jeux mis en favoris
 $stmt = $pdo->prepare("
     SELECT j.* 
     FROM user_swipes us
     JOIN jeux_videos j ON j.id_jeu = us.id_jeu
     WHERE us.client_id = ? 
-      AND us.action = 'like'
+      AND us.action = 'favorite'
 ");
 $stmt->execute([$client_id]);
 $likedGames = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -47,7 +47,7 @@ $likedGames = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <div class="right_group">
             <div class="boutons_categories">
-                <a href="favori.php"><img src="logo/boutons/Nom=Favori, Etat=Normal.svg" alt="Favori" class="favori"></a>
+                <a href="like.php"><img src="logo/boutons/Nom=like, Etat=Normal.svg" alt="like" class="like"></a>
                 <a href="dislike.php"><img src="logo/boutons/Nom=Dislike, Etat=Normal.svg" alt="Dislike" class="dislike"></a>
             </div>
         </div>

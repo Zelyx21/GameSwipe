@@ -75,3 +75,20 @@ body {
 .library-card:hover {
     transform: scale(1.05);
 }
+
+.static-card {
+    position: relative;
+    width: 250px;
+    height: 350px;
+    margin: auto;
+    transform: none !important;
+    cursor: default;
+}
+
+.static-card .flip-card-inner {
+    transform: none !important; /* pas de flip */
+}
+
+.static-card .star-button {
+    display: none; /* pas de bouton étoile dans cette vue */
+}

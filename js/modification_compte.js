@@ -115,5 +115,4 @@ $(document).ready(function(){
             });
     });
 
-
-	});
+});

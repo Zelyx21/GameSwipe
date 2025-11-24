@@ -37,8 +37,20 @@
                             class="gameswipe"></a>
                 </div>
                 <div class="boutons_compte">
-                    <a id="deconnecter"><img src="logo/boutons/Nom=Déconnecter, Etat=Normal.svg" alt="Deconnecter" class="deconnecter"></a>
-                    </div>
+                    <a href="deconnecter.php" id="deconnecter"><img src="logo/boutons/Nom=Déconnecter, Etat=Normal.svg" alt="Deconnecter" class="deconnecter"></a>
+                </div>
+            </div>
+            <div class="right_group">
+                <div class="boutons_categories">
+                    <a href="favori.php"><img src="logo/boutons/Nom=Favori, Etat=Normal.svg" alt="Favori"
+                            class="favori"></a>
+                    <a href="like.php"><img src="logo/boutons/Nom=Like, Etat=Normal.svg" alt="Like" class="like"></a>
+                    <a href="dislike.php"><img src="logo/boutons/Nom=Dislike, Etat=Normal.svg" alt="Dislike"
+                            class="dislike"></a>
+                </div>
+                <div class="bouton_filtres">
+                    <a><img src="logo/boutons/Nom=Filtres, Etat=Normal.svg" alt="Filtres" class="filtres"></a>
+                </div>
             </div>
         </div>
     </header>
