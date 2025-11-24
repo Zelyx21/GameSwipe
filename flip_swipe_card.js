@@ -1,22 +1,28 @@
 const cardStack = document.getElementById("card-stack");
 let gameData = [];
 
-// ===== Charger les cartes =====
+// Charger les cartes depuis load_cards.php
 fetch('load_cards.php')
   .then(res => res.json())
   .then(data => {
       if (!data || !data.length) return;
       gameData = data;
-      // Créer les deux premières cartes pour superposition
-      createCard(gameData[Math.floor(Math.random() * gameData.length)]);
-      createCard(gameData[Math.floor(Math.random() * gameData.length)]);
-  });
+      // Crée 2 cartes initiales
+      createCard(randomGame());
+      createCard(randomGame());
+  })
+  .catch(err => console.error("Erreur chargement cartes :", err));
 
-// ===== Créer une carte =====
+// Carte aléatoire
+function randomGame() {
+    return gameData[Math.floor(Math.random() * gameData.length)];
+}
+
+// Créer une carte
 function createCard(game) {
     const card = document.createElement("div");
     card.classList.add("flip-card");
-    card.dataset.id = game.id_jeu || game.nom_jeu;
+    card.dataset.id = game.id_jeu;
 
     card.innerHTML = `
         <div class="flip-card-inner">
@@ -26,7 +32,7 @@ function createCard(game) {
                     <img src="${game.image}" alt="${game.nom_jeu}">
                 </div>
                 <div class="card-middle">
-                    <p>${game.description}</p>
+                    <p>${game.release_date}</p>
                 </div>
                 <button class="star-button">★</button>
                 <div class="card-bottom">
@@ -39,41 +45,59 @@ function createCard(game) {
         </div>
     `;
 
-    cardStack.appendChild(card); // dernière carte = au-dessus
+    // Bouton étoile
+    const starBtn = card.querySelector(".star-button");
+    starBtn.addEventListener("click", e => {
+        e.stopPropagation(); // ne déclenche pas le flip
+        sendSwipe(card.dataset.id, "favorite");
+
+        // Marquer la carte comme en suppression
+        card.dataset.removing = "true";
+
+        // Animation de sortie
+        card.style.transition = "transform 0.4s ease-out, opacity 0.4s ease-out";
+        requestAnimationFrame(() => {
+            card.style.transform = "translate(1500px,-50px) rotate(20deg)";
+            card.style.opacity = "0";
+        });
+
+        setTimeout(() => {
+            card.remove();
+            createCard(randomGame());
+            stackAdjust();
+        }, 400);
+    });
+
+    cardStack.appendChild(card);
     enableSwipe(card);
     enableFlip(card.querySelector(".flip-card-inner"));
     stackAdjust();
 }
 
-// ===== Superposition carte du dessus + carte suivante =====
+// Ajustement pile
 function stackAdjust() {
     const cards = Array.from(cardStack.querySelectorAll(".flip-card"));
-    cards.forEach((card, i) => {
-        const topIndex = cards.length - 1;
-        const secondIndex = cards.length - 2;
+    const topIndex = cards.length - 1;
+    const secondIndex = cards.length - 2;
 
-        if (i === topIndex) { 
-            // carte du dessus
+    cards.forEach((card, i) => {
+        if (card.dataset.removing === "true") return; // ignore la carte en suppression
+
+        if (i === topIndex) {
             card.style.display = "block";
             card.style.zIndex = 10;
-            card.style.top = "0";
-            card.style.left = "0";
             card.style.transform = "translate(0,0)";
         } else if (i === secondIndex) {
-            // carte suivante, invisible mais superposée
             card.style.display = "block";
             card.style.zIndex = 5;
-            card.style.top = "0";
-            card.style.left = "0";
-            card.style.transform = "translate(0,0) scale(0.98)"; // petite réduction pour effet pile
+            card.style.transform = "translate(0,0) scale(0.98)";
         } else {
-            // toutes les autres cartes
             card.style.display = "none";
         }
     });
 }
 
-// ===== Swipe =====
+// Swipe
 function enableSwipe(card) {
     let isDragging = false;
     let startX = 0;
@@ -94,7 +118,6 @@ function enableSwipe(card) {
     function drag(e) {
         if (!isDragging) return;
         const x = (e.touches ? e.touches[0].clientX : e.clientX) - startX;
-        // translation et rotation carte du dessus
         card.style.transform = `translate(${x}px,0) rotate(${x*0.1}deg)`;
     }
 
@@ -103,52 +126,58 @@ function enableSwipe(card) {
         isDragging = false;
         const endX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
         const dx = endX - startX;
-
         card.style.transition = "transform 0.3s ease-out";
 
         if (dx > 100) {
             card.style.transform = `translate(1500px,0) rotate(20deg)`;
-            sendSwipe('like', card.dataset.id);
-            removeTopCard();
+            sendSwipe(card.dataset.id, 'like');
+            removeCard(card);
         } else if (dx < -100) {
             card.style.transform = `translate(-1500px,0) rotate(-20deg)`;
-            sendSwipe('dislike', card.dataset.id);
-            removeTopCard();
+            sendSwipe(card.dataset.id, 'dislike');
+            removeCard(card);
         } else {
             card.style.transform = "translate(0,0) rotate(0)";
         }
     }
 }
 
-// ===== Flip =====
+// Flip
 function enableFlip(inner) {
     inner.addEventListener("click", e => {
-        if (e.target.classList.contains("star-button")) return;
+        if (e.target.classList.contains("star-button")) return; // ignore star click
         inner.classList.toggle("flipped");
     });
 }
 
-// ===== Retirer carte du dessus et créer suivante =====
-function removeTopCard() {
-    const cards = Array.from(cardStack.querySelectorAll(".flip-card"));
-    if (!cards.length) return;
+// Supprimer une carte spécifique avec animation
+function removeCard(card) {
+    card.dataset.removing = "true";
+    card.style.transition = "transform 0.3s ease-out, opacity 0.3s ease-out";
+    requestAnimationFrame(() => {
+        card.style.transform = `translate(${card.style.transform.includes('-') ? '-1500px' : '1500px'},0) rotate(${card.style.transform.includes('-') ? -20 : 20}deg)`;
+        card.style.opacity = "0";
+    });
 
-    const topCard = cards[cards.length - 1];
-    topCard.remove();
-
-    // Ajouter une nouvelle carte derrière pour continuer l’infini
-    if (!gameData.length) return;
-    const randomGame = gameData[Math.floor(Math.random() * gameData.length)];
-    createCard(randomGame);
-
-    // Réajuster pile
-    stackAdjust();
+    setTimeout(() => {
+        card.remove();
+        createCard(randomGame());
+        stackAdjust();
+    }, 300);
 }
 
-// ===== Envoyer swipe =====
-function sendSwipe(action, id) {
-    fetch(`${action}.php?id=${id}`)
-        .then(res => res.json())
-        .then(data => console.log(data))
-        .catch(err => console.error(err));
+// Envoyer swipe
+function sendSwipe(gameId, action) {
+    console.log("Swipe envoyé :", gameId, action); 
+    const formData = new FormData();
+    formData.append("game_id", gameId);
+    formData.append("action", action);
+
+    fetch("swipe.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(r => r.json())
+    .then(data => console.log("Réponse serveur :", data))
+    .catch(err => console.error("Erreur swipe :", err));
 }
