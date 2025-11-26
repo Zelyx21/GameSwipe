@@ -1,24 +1,19 @@
 <?php
-session_start();
+    session_start();
+    require "fonctions.php";
+    $bdd = getBDD();
 
-if (empty($_SESSION['token'])) {
-    $_SESSION['token'] = bin2hex(random_bytes(32));
-}
-$token = $_SESSION['token'];
+    if(!isset($_SESSION["client"])) {
+        echo "non connecté";
+        exit;
+    }
 
-$host = "localhost";
-$dbname = "gameswipe"; 
-$username = "root";      
-$password = "";          
+    if(!isset($_SESSION['token'])) {
+        $_SESSION['token'] = bin2hex(random_bytes(32));
+    }
+    $token = $_SESSION['token'];
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $selectedGenres = $_POST['genres'] ?? [];
 
@@ -35,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $values[$column] = in_array($label, $selectedGenres) ? 0 : 1;
     }
 
-    $stmt = $pdo->prepare("
+    $stmt = $bdd->prepare("
         INSERT INTO quest1 (id_client, solo, coop, multi, mmo, vr)
         VALUES (:id_client, :solo, :coop, :multi, :mmo, :vr)
         ON DUPLICATE KEY UPDATE
@@ -46,9 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             vr = VALUES(vr)
     ");
 
-    $id_client = $_SESSION['id_client'] ?? null;
+    $id_client = $_SESSION['client']['id'] ?? null;
     if (!$id_client) {
-        die("Erruer : Utilisateur non connecté.");
+        die("Erreur : Utilisateur non connecté.");
     }
 
     $stmt->execute([
