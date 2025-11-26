@@ -36,18 +36,47 @@ $stmtDelete->execute([
 ]);
 
 // Insérer la nouvelle action
-try {
-    $stmt = $pdo->prepare("
-        INSERT INTO user_swipes (client_id, id_jeu, action)
-        VALUES (:client_id, :id_jeu, :action)
-    ");
+if($action == "like"){
+    $stmt = $pdo->prepare("INSERT INTO `like` (id_client, id_jeu)
+        VALUES (:client_id, :id_jeu)");
     $stmt->execute([
         ':client_id' => $client_id,
         ':id_jeu'    => $game_id,
-        ':action'    => $action
     ]);
-
     echo json_encode(["success" => true]);
-} catch (PDOException $e) {
+} else if($action == "dislike"){
+    $stmt = $pdo->prepare("INSERT INTO dislike (id_client, id_jeu)
+            VALUES (:client_id, :id_jeu)");
+    $stmt->execute([
+        ':client_id' => $client_id,
+        ':id_jeu'    => $game_id,
+    ]);
+    echo json_encode(["success" => true]);
+} else if($action == "favorite"){
+    $stmt = $pdo->prepare("INSERT INTO favori (id_clientS, id_jeu)
+        VALUES (:client_id, :id_jeu)");
+    $stmt->execute([
+        ':client_id' => $client_id,
+        ':id_jeu'    => $game_id,
+    ]);
+    echo json_encode(["success" => true]);
+} else{
     echo json_encode(["error" => $e->getMessage()]);
 }
+
+
+#try {
+#    $stmt = $pdo->prepare("
+#        INSERT INTO user_swipes (client_id, id_jeu, action)
+#        VALUES (:client_id, :id_jeu, :action)
+#    ");
+#    $stmt->execute([
+#        ':client_id' => $client_id,
+#        ':id_jeu'    => $game_id,
+#        ':action'    => $action
+#    ]);
+#
+#    echo json_encode(["success" => true]);
+#} catch (PDOException $e) {
+#    echo json_encode(["error" => $e->getMessage()]);
+#}

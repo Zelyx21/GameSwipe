@@ -10,9 +10,27 @@
         $_SESSION['token'] = bin2hex(random_bytes(32));
     }
     $token = $_SESSION['token'];
-
+    
+    $id = $_SESSION["client"]["id"];
     $nom = $_SESSION["client"]["nom"];
-    $mail = $_SESSION["client"]["mail"];
+
+    require 'fonctions.php';
+    $bdd = getBDD();
+
+    $sql = "SELECT (SELECT COUNT(*) FROM `like` WHERE id_client = :id_client) AS nbr_like,
+        (SELECT COUNT(*) FROM dislike WHERE id_client = :id_client) AS nbr_dislike,
+        (SELECT COUNT(*) FROM favori WHERE id_client = :id_client) AS nbr_favori,
+        (SELECT COUNT(*) FROM `like` WHERE id_client = :id_client) +
+        (SELECT COUNT(*) FROM dislike WHERE id_client = :id_client) +
+        (SELECT COUNT(*) FROM favori WHERE id_client = :id_client) AS total_swipe;";
+    $stmt = $bdd->prepare($sql);
+    $stmt->execute([':id_client' => $id]);
+    $ligne = $stmt->fetch();
+
+    $like = $ligne['nbr_like'];
+    $dislike = $ligne['nbr_dislike'];
+    $favori = $ligne['nbr_favori'];
+    $total = $ligne['total_swipe'];
 ?>
 
 <!DOCTYPE html>
@@ -71,16 +89,16 @@
             <div class="stats">
                 <div class="stat-row"><p class="stat-label">
                     <img src="logo/horloge.svg" alt="Favori">
-                    Cartes Swipé :</p><p class="stat-value">47</p></div>
+                    Cartes Swipé :</p><p class="stat-value"><?php echo $total; ?></p></div>
                 <div class="stat-row"><p class="stat-label">
                     <img src="logo/horloge.svg" alt="Favori">
-                    Cartes Liké :<p class="stat-value">23</p></div>
+                    Cartes Liké :<p class="stat-value"><?php echo $like; ?></p></div>
                 <div class="stat-row"><p class="stat-label">
                     <img src="logo/horloge.svg" alt="Favori">
-                    Cartes Disliké :</p><p class="stat-value">15</p></div>
+                    Cartes Disliké :</p><p class="stat-value"><?php echo $dislike; ?></p></div>
                 <div class="stat-row"><p class="stat-label">
                     <img src="logo/horloge.svg" alt="Favori">
-                    Cartes Favoris :</p><p class="stat-value">9</p></div>
+                    Cartes Favoris :</p><p class="stat-value"><?php echo $favori; ?></p></div>
             </div>
             <div class="last-conn">
                 <div><p><strong>Dernière Connexion</strong></p></div>
