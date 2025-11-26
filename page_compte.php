@@ -108,7 +108,7 @@
             </div>
 
             <div class="bouton-input-modif">
-                <button class="btn_secondaire">Supprimer <br> l’historique de mon <br> compte</button>
+                <button  type="button" id="reset-historique" class="btn_secondaire" >Supprimer <br> l’historique de mon <br> compte</button>
                 <p>Supprime l'historique des jeux que vous avez Love, Like et Dislike</p>
             </div>
 
@@ -124,5 +124,10 @@
     document.getElementById("reset-quiz").addEventListener("click", function(){
         window.location.href = "reset_quiz.php";
     });
+    document.getElementById("reset-historique").addEventListener("click", function(){
+    if(confirm("Êtes-vous sûr de vouloir supprimer tout votre historique ? Cette action est irréversible !")){
+        window.location.href = "supprimer_historique.php";
+    }
+});
 </script>
 </html>

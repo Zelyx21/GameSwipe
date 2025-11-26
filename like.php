@@ -10,11 +10,10 @@ require 'database.php';
 
 // Récupérer les jeux likés
 $stmt = $pdo->prepare("
-    SELECT j.* 
-    FROM user_swipes us
-    JOIN jeux_videos j ON j.id_jeu = us.id_jeu
-    WHERE us.client_id = ? 
-      AND us.action = 'like'
+    SELECT * 
+    FROM `like` l
+    JOIN jeux_videos j ON j.id_jeu = l.id_jeu
+    WHERE l.id_client = ? 
 ");
 $stmt->execute([$client_id]);
 $likedGames = $stmt->fetchAll(PDO::FETCH_ASSOC);
