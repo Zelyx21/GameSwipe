@@ -48,7 +48,10 @@
         </div>
     </header>
 
-    <?php include 'burger.php'; ?>
+    <div class="header-container">
+        <?php include 'burger.php'; ?>
+        <h1 class="titre_haut">Notre équipe</h1>
+    </div>
 
     <p class="text_contact intro">Bonjour,</p>
     <p class="text_contact">
@@ -67,7 +70,8 @@
     </p>
 
     <p class="text_contact">
-        Pour toute demande, vous pouvez nous contacter à l'adresse mail dédiée : blablabli@bla.com.
+        Pour toute demande, vous pouvez nous contacter aux adresses mails dédiées :<br>
+        gameswipe.projet@gmail.com
     </p>
 
 </body>

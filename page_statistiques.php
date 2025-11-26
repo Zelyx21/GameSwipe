@@ -31,6 +31,13 @@
     $dislike = $ligne['nbr_dislike'];
     $favori = $ligne['nbr_favori'];
     $total = $ligne['total_swipe'];
+
+    $sql = "SELECT * FROM client WHERE id_client = :id_client;";
+    $stmt = $bdd->prepare($sql);
+    $stmt->execute([':id_client' => $id]);
+    $ligne = $stmt->fetch();
+
+    $creation_co = $ligne['premiere_co'];
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +65,7 @@
                         echo '<a href="inscription.php"><img src="logo/boutons/Nom=Inscrire, Etat=Normal.svg" alt="Inscrire" class="inscrire"></a>
                     <a href="connexion.php"><img src="logo/boutons/Nom=Connecter, Etat=Normal.svg" alt="Connecter" class="connecter"></a>';
                     } else {
-                        echo '<a id="deconnecter"><img src="logo/boutons/Nom=Déconnecter, Etat=Normal.svg" alt="Deconnecter" class="deconnecter"></a>';
+                        echo '<a id="deconnecter.php"><img src="logo/boutons/Nom=Déconnecter, Etat=Normal.svg" alt="Deconnecter" class="deconnecter"></a>';
                     }
                     ?>
                 </div>
@@ -101,8 +108,8 @@
                     Cartes Favoris :</p><p class="stat-value"><?php echo $favori; ?></p></div>
             </div>
             <div class="last-conn">
-                <div><p><strong>Dernière Connexion</strong></p></div>
-                <div></p>• 21/10/2024 à 22h10, FRANCE</p></div>
+                <div><p><strong>Date de création du Compte :</strong></p></div>
+                <div></p><?php echo $creation_co; ?></p></div>
             </div>
         </div>
 
