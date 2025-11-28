@@ -10,11 +10,10 @@ require 'database.php';
 
 // Récupérer les jeux mis en favoris
 $stmt = $pdo->prepare("
-    SELECT j.* 
-    FROM user_swipes us
-    JOIN jeux_videos j ON j.id_jeu = us.id_jeu
-    WHERE us.client_id = ? 
-      AND us.action = 'favorite'
+    SELECT * 
+    FROM favori as fav
+    JOIN jeux_videos j ON j.id_jeu = fav.id_jeu
+    WHERE fav.id_client = ? 
 ");
 $stmt->execute([$client_id]);
 $likedGames = $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // -----------------------
             starButton.addEventListener("click", e => {
                 e.stopPropagation();
-                envoyerSwipe("favorite");
+                envoyerSwipe("favori");
             });
 
             // -----------------------

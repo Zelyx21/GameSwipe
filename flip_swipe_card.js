@@ -49,7 +49,7 @@ function createCard(game) {
     const starBtn = card.querySelector(".star-button");
     starBtn.addEventListener("click", e => {
         e.stopPropagation(); // ne déclenche pas le flip
-        sendSwipe(card.dataset.id, "favorite");
+        sendSwipe(card.dataset.id, "favori");
 
         // Marquer la carte comme en suppression
         card.dataset.removing = "true";
