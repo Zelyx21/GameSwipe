@@ -17,6 +17,7 @@
     require 'fonctions.php';
     $bdd = getBDD();
 
+    // Recherche des données standars
     $sql = "SELECT (SELECT COUNT(*) FROM `like` WHERE id_client = :id_client) AS nbr_like,
         (SELECT COUNT(*) FROM dislike WHERE id_client = :id_client) AS nbr_dislike,
         (SELECT COUNT(*) FROM favori WHERE id_client = :id_client) AS nbr_favori,
@@ -38,6 +39,43 @@
     $ligne = $stmt->fetch();
 
     $creation_co = $ligne['premiere_co'];
+
+    // Recherche des données pour le graphique
+    // Définir les catégories à afficher dans le radar
+$categories = [
+    "Co-op" => "Co-op",
+    "MMO" => "MMO",
+    "Mods" => "Mods",
+    "Multi-player" => "Multi-player",
+    "PvP" => "PvP",
+    "Trading Cards" => "Trading Cards",
+    "Single-player" => "Single-player",
+    "Controller" => "Controller",
+    "VR" => "VR"
+];
+
+// Récupérer le nombre de likes par catégorie pour ce client
+$data = [];
+foreach($categories as $label => $keyword){
+    $sql = "
+        SELECT COUNT(DISTINCT l.id_jeu) AS nb_likes
+        FROM `like` l
+        JOIN a_category ac ON l.id_jeu = ac.id_jeu
+        JOIN category c ON ac.id_cat = c.id_cat
+        WHERE l.id_client = :id_client
+        AND c.nom_cat LIKE :keyword
+    ";
+    $stmt = $bdd->prepare($sql);
+    $stmt->execute([
+        ':id_client' => $id,
+        ':keyword'   => "%$keyword%"
+    ]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $data[] = [
+        "categorie" => $label,
+        "likes"     => (int)$row['nb_likes']
+    ];
+}
 ?>
 
 <!DOCTYPE html>
@@ -48,6 +86,15 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="js/jquery.js"></script>
     <title>Profil</title>
+
+    <style>
+        .droite canvas {
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
+  }
+    </style>
 
 </head>
 
@@ -116,23 +163,101 @@
         <!-- Colonne de droite -->
         <div class="droite">
             <div><p>Temps passé récemment</p></div>
-            <div class="droite-clock"><img src="logo/horloge.svg" alt="horloge"></div>
-            Un camembert peut etre sympa
-
-            nom des caté diff:
-                Co-op 
-                MMO
-                Mods
-                Multi-player
-                PvP
-                Remote Play
-                Shared/Split Screen
-                Controller support
-                Caption available
-                VR
-                ....
+                <div class="droite-clock"><img src="logo/horloge.svg" alt="horloge"></div>
+                Un camembert peut etre sympa
+                <canvas id="radar"></canvas>
             </div>
     </div>
+
+    <script>
+// Données PHP injectées dans JS
+const dataSQL = <?php echo json_encode($data); ?>;
+const labels = dataSQL.map(d => d.categorie);
+const values = dataSQL.map(d => d.likes);
+const maxLikes = Math.max(...values);
+
+const canvas = document.getElementById("radar");
+const ctx = canvas.getContext("2d");
+
+// Récupérer la taille du div parent
+const parent = canvas.parentElement;
+canvas.width = parent.clientWidth;
+canvas.height = parent.clientHeight;
+
+const cx = canvas.width / 2;
+const cy = canvas.height / 2;
+
+// Rayon : laisser une marge pour les labels
+const radius = Math.min(cx, cy) * 0.7; 
+
+const total = labels.length;
+
+// Dessiner la grille du radar
+function drawGrid() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    ctx.strokeStyle = "#ddd";
+    ctx.lineWidth = 1;
+
+    for (let level = 1; level <= 5; level++) {
+        const r = radius * (level / 5);
+        ctx.beginPath();
+        for (let i = 0; i < total; i++) {
+            const angle = (2 * Math.PI / total) * i - Math.PI/2;
+            const x = cx + Math.cos(angle) * r;
+            const y = cy + Math.sin(angle) * r;
+            i === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+        }
+        ctx.closePath();
+        ctx.stroke();
+    }
+
+    // Axes et labels
+    ctx.strokeStyle = "#aaa";
+    ctx.fillStyle = "#000";
+    ctx.font = "14px Arial";
+
+    labels.forEach((label, i) => {
+        const angle = (2 * Math.PI / total) * i - Math.PI/2;
+        const x = cx + Math.cos(angle) * radius;
+        const y = cy + Math.sin(angle) * radius;
+
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+
+        const lx = cx + Math.cos(angle) * (radius + 20);
+        const ly = cy + Math.sin(angle) * (radius + 20);
+        ctx.textAlign = Math.cos(angle) > 0.1 ? "left" : Math.cos(angle) < -0.1 ? "right" : "center";
+        ctx.fillText(label, lx, ly);
+    });
+}
+
+// Dessiner les données du radar
+function drawData() {
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(0,150,255,0.2)";
+    ctx.strokeStyle = "#0096FF";
+    ctx.lineWidth = 2;
+
+    for (let i = 0; i < total; i++) {
+        const v = values[i] / maxLikes;
+        const angle = (2 * Math.PI / total) * i - Math.PI/2;
+        const x = cx + Math.cos(angle) * radius * v;
+        const y = cy + Math.sin(angle) * radius * v;
+        i === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+    }
+
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+}
+
+// Affichage final
+drawGrid();
+drawData();
+</script>
 
 </body>
 
