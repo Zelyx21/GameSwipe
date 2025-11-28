@@ -65,7 +65,7 @@
                         echo '<a href="inscription.php"><img src="logo/boutons/Nom=Inscrire, Etat=Normal.svg" alt="Inscrire" class="inscrire"></a>
                     <a href="connexion.php"><img src="logo/boutons/Nom=Connecter, Etat=Normal.svg" alt="Connecter" class="connecter"></a>';
                     } else {
-                        echo '<a id="deconnecter.php"><img src="logo/boutons/Nom=Déconnecter, Etat=Normal.svg" alt="Deconnecter" class="deconnecter"></a>';
+                        echo '<a href="testgraphe.php" id="deconnecter"><img src="logo/boutons/Nom=Déconnecter, Etat=Normal.svg" alt="Deconnecter" class="deconnecter"></a>';
                     }
                     ?>
                 </div>
@@ -117,7 +117,21 @@
         <div class="droite">
             <div><p>Temps passé récemment</p></div>
             <div class="droite-clock"><img src="logo/horloge.svg" alt="horloge"></div>
-        </div>
+            Un camembert peut etre sympa
+
+            nom des caté diff:
+                Co-op 
+                MMO
+                Mods
+                Multi-player
+                PvP
+                Remote Play
+                Shared/Split Screen
+                Controller support
+                Caption available
+                VR
+                ....
+            </div>
     </div>
 
 </body>
