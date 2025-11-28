@@ -55,7 +55,7 @@ session_start();
         </div>
     </div>
 
-    <script src="flip_swipe_card.js"></script>
+    <script src="js/flip_swipe_card.js"></script>
 </body>
 </html>
 

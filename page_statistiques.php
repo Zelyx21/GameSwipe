@@ -42,40 +42,37 @@
 
     // Recherche des données pour le graphique
     // Définir les catégories à afficher dans le radar
-$categories = [
-    "Co-op" => "Co-op",
-    "MMO" => "MMO",
-    "Mods" => "Mods",
-    "Multi-player" => "Multi-player",
-    "PvP" => "PvP",
-    "Trading Cards" => "Trading Cards",
-    "Single-player" => "Single-player",
-    "Controller" => "Controller",
-    "VR" => "VR"
-];
-
-// Récupérer le nombre de likes par catégorie pour ce client
-$data = [];
-foreach($categories as $label => $keyword){
-    $sql = "
-        SELECT COUNT(DISTINCT l.id_jeu) AS nb_likes
-        FROM `like` l
-        JOIN a_category ac ON l.id_jeu = ac.id_jeu
-        JOIN category c ON ac.id_cat = c.id_cat
-        WHERE l.id_client = :id_client
-        AND c.nom_cat LIKE :keyword
-    ";
-    $stmt = $bdd->prepare($sql);
-    $stmt->execute([
-        ':id_client' => $id,
-        ':keyword'   => "%$keyword%"
-    ]);
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    $data[] = [
-        "categorie" => $label,
-        "likes"     => (int)$row['nb_likes']
+    $categories = [
+        "Co-op" => "Co-op",
+        "MMO" => "MMO",
+        "Multi-player" => "Multi-player",
+        "PvP" => "PvP",
+        "Single-player" => "Single-player",
+        "VR" => "VR"
     ];
-}
+
+    // Récupérer le nombre de likes par catégorie pour ce client
+    $data = [];
+    foreach($categories as $label => $keyword){
+        $sql = "
+            SELECT COUNT(DISTINCT l.id_jeu) AS nb_likes
+            FROM `like` l
+            JOIN a_category ac ON l.id_jeu = ac.id_jeu
+            JOIN category c ON ac.id_cat = c.id_cat
+            WHERE l.id_client = :id_client
+            AND c.nom_cat LIKE :keyword
+        ";
+        $stmt = $bdd->prepare($sql);
+        $stmt->execute([
+            ':id_client' => $id,
+            ':keyword'   => "%$keyword%"
+        ]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $data[] = [
+            "categorie" => $label,
+            "likes"     => (int)$row['nb_likes']
+        ];
+    }
 ?>
 
 <!DOCTYPE html>
@@ -86,15 +83,6 @@ foreach($categories as $label => $keyword){
     <link rel="stylesheet" href="css/style.css">
     <script src="js/jquery.js"></script>
     <title>Profil</title>
-
-    <style>
-        .droite canvas {
-      width: 100%;
-      height: 100%;
-      max-width: 100%;
-      max-height: 100%;
-  }
-    </style>
 
 </head>
 
@@ -112,7 +100,7 @@ foreach($categories as $label => $keyword){
                         echo '<a href="inscription.php"><img src="logo/boutons/Nom=Inscrire, Etat=Normal.svg" alt="Inscrire" class="inscrire"></a>
                     <a href="connexion.php"><img src="logo/boutons/Nom=Connecter, Etat=Normal.svg" alt="Connecter" class="connecter"></a>';
                     } else {
-                        echo '<a href="testgraphe.php" id="deconnecter"><img src="logo/boutons/Nom=Déconnecter, Etat=Normal.svg" alt="Deconnecter" class="deconnecter"></a>';
+                        echo '<a href="deconnecter.php" id="deconnecter"><img src="logo/boutons/Nom=Déconnecter, Etat=Normal.svg" alt="Deconnecter" class="deconnecter"></a>';
                     }
                     ?>
                 </div>
@@ -164,82 +152,124 @@ foreach($categories as $label => $keyword){
         <div class="droite">
             <div><p>Temps passé récemment</p></div>
                 <div class="droite-clock"><img src="logo/horloge.svg" alt="horloge"></div>
-                Un camembert peut etre sympa
-                <canvas id="radar"></canvas>
+                <div class="radar-wrap">
+                    <canvas id="radar"></canvas>
+                </div>
             </div>
     </div>
 
     <script>
-// Données PHP injectées dans JS
-const dataSQL = <?php echo json_encode($data); ?>;
-const labels = dataSQL.map(d => d.categorie);
-const values = dataSQL.map(d => d.likes);
-const maxLikes = Math.max(...values);
+    // Données PHP injectées dans JS (déjà calculées côté PHP)
+    const dataSQL = <?php echo json_encode($data); ?>;
+    const labels = dataSQL.map(d => d.categorie);
+    const values = dataSQL.map(d => d.likes);
 
-const canvas = document.getElementById("radar");
-const ctx = canvas.getContext("2d");
+    // sécurité : éviter -Infinity si toutes les valeurs sont à 0
+    const maxLikes = values.length ? Math.max(...values) || 1 : 1;
 
-// Récupérer la taille du div parent
-const parent = canvas.parentElement;
-canvas.width = parent.clientWidth;
-canvas.height = parent.clientHeight;
+    const canvas = document.getElementById("radar");
+    const wrapper = canvas.parentElement;
+    const ctx = canvas.getContext("2d");
 
-const cx = canvas.width / 2;
-const cy = canvas.height / 2;
+    // Fonction qui gère le resize + redraw
+    function resizeAndDraw(){
+    const size = Math.min(wrapper.clientWidth, wrapper.clientHeight);
+    const dpr = window.devicePixelRatio || 1;
 
-// Rayon : laisser une marge pour les labels
-const radius = Math.min(cx, cy) * 0.7; 
+    canvas.width = size * dpr;
+    canvas.height = size * dpr;
+    canvas.style.width = size + "px";
+    canvas.style.height = size + "px";
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-const total = labels.length;
+    const cx = size / 2;
+    const cy = size / 2;
+    const radius = size * 0.35; // bien centré avec marge
 
-// Dessiner la grille du radar
-function drawGrid() {
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+    drawRadar(ctx, cx, cy, radius, labels, values, maxLikes, size);
+    }
 
+    // Offset dynamique des labels
+    function sizeLabelOffset(radius){
+    return Math.max(6, radius * 0.1);
+    }
+
+    // Fonction pour écrire du texte sur plusieurs lignes
+    function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+    const words = text.split(" ");
+    let line = "";
+    let offsetY = 0;
+
+    for (let i = 0; i < words.length; i++) {
+        const testLine = line + words[i] + " ";
+        const testWidth = ctx.measureText(testLine).width;
+
+        if (testWidth > maxWidth && i > 0) {
+        ctx.fillText(line, x, y + offsetY);
+        line = words[i] + " ";
+        offsetY += lineHeight;
+        } else {
+        line = testLine;
+        }
+    }
+    ctx.fillText(line, x, y + offsetY);
+    }
+
+    // Fonction principale de dessin du radar
+    function drawRadar(ctx, cx, cy, radius, labels, values, maxLikes, size){
+    const total = labels.length;
+    ctx.clearRect(0, 0, size, size);
+
+    // === GRILLE ===
     ctx.strokeStyle = "#ddd";
     ctx.lineWidth = 1;
-
     for (let level = 1; level <= 5; level++) {
         const r = radius * (level / 5);
         ctx.beginPath();
         for (let i = 0; i < total; i++) {
-            const angle = (2 * Math.PI / total) * i - Math.PI/2;
-            const x = cx + Math.cos(angle) * r;
-            const y = cy + Math.sin(angle) * r;
-            i === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+        const angle = (2 * Math.PI / total) * i - Math.PI/2;
+        const x = cx + Math.cos(angle) * r;
+        const y = cy + Math.sin(angle) * r;
+        i === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
         }
         ctx.closePath();
         ctx.stroke();
     }
 
-    // Axes et labels
+    // === AXES + LABELS ===
     ctx.strokeStyle = "#aaa";
     ctx.fillStyle = "#000";
-    ctx.font = "14px Arial";
 
     labels.forEach((label, i) => {
-        const angle = (2 * Math.PI / total) * i - Math.PI/2;
+        const angle = (2 * Math.PI / total) * i - Math.PI / 2;
         const x = cx + Math.cos(angle) * radius;
         const y = cy + Math.sin(angle) * radius;
-
         ctx.beginPath();
         ctx.moveTo(cx, cy);
         ctx.lineTo(x, y);
         ctx.stroke();
 
-        const lx = cx + Math.cos(angle) * (radius + 20);
-        const ly = cy + Math.sin(angle) * (radius + 20);
-        ctx.textAlign = Math.cos(angle) > 0.1 ? "left" : Math.cos(angle) < -0.1 ? "right" : "center";
-        ctx.fillText(label, lx, ly);
-    });
-}
+        const lx = cx + Math.cos(angle) * (radius + sizeLabelOffset(radius));
+        const ly = cy + Math.sin(angle) * (radius + sizeLabelOffset(radius));
 
-// Dessiner les données du radar
-function drawData() {
+        // === Gestion de la taille de police selon longueur ===
+        let fontSize = Math.max(9, Math.round(size * 0.03));
+        if (label.length >= 10) fontSize *= 0.9;
+
+        ctx.font = fontSize + "px Arial";
+        const maxWidth = size * 0.22;
+        const lineHeight = fontSize + 2;
+        
+        ctx.textAlign = Math.cos(angle) > 0.15 ? "left" : Math.cos(angle) < -0.15 ? "right" : "center";
+
+        wrapText(ctx, label, lx, ly - fontSize/2, maxWidth, lineHeight);
+    });
+
+    // === DONNÉES POLYGONE ===
     ctx.beginPath();
-    ctx.fillStyle = "rgba(0,150,255,0.2)";
+    ctx.fillStyle = "rgba(0,150,255,0.25)";
     ctx.strokeStyle = "#0096FF";
-    ctx.lineWidth = 2;
+    ctx.lineWidth = Math.max(1.5, Math.round(size * 0.006));
 
     for (let i = 0; i < total; i++) {
         const v = values[i] / maxLikes;
@@ -252,12 +282,18 @@ function drawData() {
     ctx.closePath();
     ctx.fill();
     ctx.stroke();
-}
+    }
 
-// Affichage final
-drawGrid();
-drawData();
+    // Observer pour redessiner si le div change (responsive)
+    const ro = new ResizeObserver(() => resizeAndDraw());
+    ro.observe(wrapper);
+
+    // Render au chargement et resize
+    window.addEventListener('load', resizeAndDraw);
+    window.addEventListener('resize', resizeAndDraw);
 </script>
+
+
 
 </body>
 
