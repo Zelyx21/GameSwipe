@@ -21,7 +21,7 @@
         <div class="top_bar">
             <div class="left_group">
                 <div class="gameswipe">
-                    <a href="accueil.php"><img src="logo/boutons/Nom=GameSwipe, Etat=Normal.svg" alt="GameSwipe"
+                    <a href="quiz_age.php"><img src="logo/boutons/Nom=GameSwipe, Etat=Normal.svg" alt="GameSwipe"
                             class="gameswipe"></a>
                 </div>
             </div>
