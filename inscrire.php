@@ -31,7 +31,7 @@ if ($stmt->rowCount() > 0) {
 if ($mdp1 != $mdp2) {
     echo "Les mots de passe ne sont pas identiques.";
 } else {
-    $sql = "INSERT INTO client (nom_client, mail, mdp) VALUES (:nom,:mail,:mdp)";
+    $sql = "INSERT INTO client (nom_client, mail, mdp, premiere_co) VALUES (:nom,:mail,:mdp, NOW())";
     $mdp = password_hash($mdp1, PASSWORD_DEFAULT);
     $req = $bdd->prepare($sql);
     $req->execute([

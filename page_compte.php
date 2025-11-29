@@ -108,7 +108,7 @@
             </div>
 
             <div class="bouton-input-modif">
-                <button  type="button" id="reset-historique" class="btn_secondaire" >Supprimer <br> l’historique de mon <br> compte</button>
+                <button  type="button" id="reset-historique" class="btn_secondaire" >Supprimer <br> l’historique de mon compte</button>
                 <p>Supprime l'historique des jeux que vous avez Love, Like et Dislike</p>
             </div>
 

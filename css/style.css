@@ -174,6 +174,7 @@ a {
 
 body.burger-bg .burger_bar {
     background-color: #3C2C59;
+    text-align: center;
 }
 
 .burger {
@@ -610,13 +611,30 @@ label {
 /* ----------------------------------------------------------
 
 /* ===== Page contact ===== */
+body.burger-bg .header-container {
+    display: flex;
+    position: relative;
+    align-items: center;
+    background-color: #3C2C59;
+    left: 0;
+}
+
+body.burger-bg .titre_haut {
+    position: fixed;
+    color: #C9BFF3;
+    font-size: 2.5em;
+    letter-spacing: 1px;
+    margin: 0 auto;
+    left: 50%;
+}
+
 .text_contact {
     margin-left: 7.5em;
     margin-right: 7.5em;
     font-size: 1.8em;
     line-height: 1.6;
     color: #8874DF;
-    margin-top: 1em;
+    margin-top: 0.5em;
     text-indent: 2em;
 }
 
@@ -714,7 +732,7 @@ label {
     vertical-align: top;
     flex: 1;        /* chaque colonne prend la même largeur */
     min-height: 22em;
-    min-width: 22em;
+    min-width: 24em;
     text-align: center;
     font-size: 1.3em;
     font-weight: bold;
@@ -725,6 +743,36 @@ label {
     right: 18px;
     top: 16px;
     font-size: 1.7em;
+}
+
+.droite canvas {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* wrapper carré qui garde un ratio 1:1 */
+.radar-wrap {
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    /* Le pseudo-élément crée l'espace (height) égal à la largeur -> carré */
+}
+
+.radar-wrap::before {
+    content: "";
+    display: block;
+    padding-top: 100%; /* 100% == carré */
+}
+
+/* canvas placé absolument pour remplir le wrapper carré */
+.radar-wrap canvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 /* ===== Fin page statistiques ===== */
 
