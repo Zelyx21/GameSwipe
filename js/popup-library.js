@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 formData.append("game_id", gameId);
                 formData.append("action", action);
 
-                fetch("swipe.php", { method: "POST", body: formData })
+                fetch("../carte/swipe.php", { method: "POST", body: formData })
                     .then(res => res.json())
                     .then(data => {
                         if (data.success) {

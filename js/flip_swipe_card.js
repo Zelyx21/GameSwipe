@@ -2,7 +2,7 @@ const cardStack = document.getElementById("card-stack");
 let gameData = [];
 
 // Charger les cartes depuis load_cards.php
-fetch('load_cards.php')
+fetch('carte/load_cards.php')
   .then(res => res.json())
   .then(data => {
       if (!data || !data.length) return;
@@ -173,7 +173,7 @@ function sendSwipe(gameId, action) {
     formData.append("game_id", gameId);
     formData.append("action", action);
 
-    fetch("swipe.php", {
+    fetch("carte/swipe.php", {
         method: "POST",
         body: formData
     })

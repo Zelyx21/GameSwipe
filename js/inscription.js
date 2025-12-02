@@ -63,7 +63,7 @@ $(document).ready(function () {
                     if (response == '1') {
                         $('#message_form').text("Création de compte réussie.").css('color', '');
                         setTimeout(function(){
-                            window.location.href = "/GameSwipe/quiz_age.php";
+                            window.location.href = "../quizz/quiz_age.php";
                         },1000);
                     }
                     else if (response == 'Erreur de token.') {

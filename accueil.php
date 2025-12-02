@@ -24,8 +24,8 @@ session_start();
                 <div class="boutons_compte">
                     <?php
                     if (!isset($_SESSION['client']) || empty($_SESSION['client'])) {
-                        echo '<a href="inscription.php"><img src="logo/boutons/Nom=Inscrire, Etat=Normal.svg" alt="Inscrire" class="inscrire"></a>
-                    <a href="connexion.php"><img src="logo/boutons/Nom=Connecter, Etat=Normal.svg" alt="Connecter" class="connecter"></a>';
+                        echo '<a href="compte/inscription.php"><img src="logo/boutons/Nom=Inscrire, Etat=Normal.svg" alt="Inscrire" class="inscrire"></a>
+                    <a href="compte/connexion.php"><img src="logo/boutons/Nom=Connecter, Etat=Normal.svg" alt="Connecter" class="connecter"></a>';
                     } else {
                         echo '<a id="deconnecter"><img src="logo/boutons/Nom=Déconnecter, Etat=Normal.svg" alt="Deconnecter" class="deconnecter"></a>';
                     }
@@ -34,10 +34,10 @@ session_start();
             </div>
             <div class="right_group">
                 <div class="boutons_categories">
-                    <a href="favori.php"><img src="logo/boutons/Nom=Favori, Etat=Normal.svg" alt="Favori"
+                    <a href="classement/favori.php"><img src="logo/boutons/Nom=Favori, Etat=Normal.svg" alt="Favori"
                             class="favori"></a>
-                    <a href="like.php"><img src="logo/boutons/Nom=Like, Etat=Normal.svg" alt="Like" class="like"></a>
-                    <a href="dislike.php"><img src="logo/boutons/Nom=Dislike, Etat=Normal.svg" alt="Dislike"
+                    <a href="classement/like.php"><img src="logo/boutons/Nom=Like, Etat=Normal.svg" alt="Like" class="like"></a>
+                    <a href="classement/dislike.php"><img src="logo/boutons/Nom=Dislike, Etat=Normal.svg" alt="Dislike"
                             class="dislike"></a>
                 </div>
                 <div class="bouton_filtres">
