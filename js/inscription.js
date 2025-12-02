@@ -63,17 +63,16 @@ $(document).ready(function () {
                     if (response == '1') {
                         $('#message_form').text("Création de compte réussie.").css('color', '');
                         setTimeout(function(){
-                            window.location.href = "/GameSwipe/accueil.php";
+                            window.location.href = "/GameSwipe/quiz_age.php";
                         },1000);
-                    } else if (response == 'Erreur de token.') {
+                    }
+                    else if (response == 'Erreur de token.') {
                         $('#message_form').text(response).css('color', 'red');
-                        setTimeout(function () {
-                            window.location.href = '/GameSwipe/accueil.php';
-                        }, 1000);
                     }
                     else {
                         $('#message_form').text(response).css('color', 'red');
                     }
+
                 },
                 error: function () {
                     $('#message_form').text("Erreur lors de la création du compte. Veuillez réessayer.").css('color', 'red');
