@@ -1,80 +1,3 @@
-<?php
-    session_start();
-
-    if(!isset($_SESSION["client"])){
-        header("Location: connexion.php");
-        exit;
-    }
-
-    if(!isset($_SESSION['token'])) {
-        $_SESSION['token'] = bin2hex(random_bytes(32));
-    }
-    $token = $_SESSION['token'];
-    
-    $id = $_SESSION["client"]["id"];
-    $nom = $_SESSION["client"]["nom"];
-
-    require 'fonctions.php';
-    $bdd = getBDD();
-
-    // Recherche des données standars
-    $sql = "SELECT (SELECT COUNT(*) FROM `like` WHERE id_client = :id_client) AS nbr_like,
-        (SELECT COUNT(*) FROM dislike WHERE id_client = :id_client) AS nbr_dislike,
-        (SELECT COUNT(*) FROM favori WHERE id_client = :id_client) AS nbr_favori,
-        (SELECT COUNT(*) FROM `like` WHERE id_client = :id_client) +
-        (SELECT COUNT(*) FROM dislike WHERE id_client = :id_client) +
-        (SELECT COUNT(*) FROM favori WHERE id_client = :id_client) AS total_swipe;";
-    $stmt = $bdd->prepare($sql);
-    $stmt->execute([':id_client' => $id]);
-    $ligne = $stmt->fetch();
-
-    $like = $ligne['nbr_like'];
-    $dislike = $ligne['nbr_dislike'];
-    $favori = $ligne['nbr_favori'];
-    $total = $ligne['total_swipe'];
-
-    $sql = "SELECT * FROM client WHERE id_client = :id_client;";
-    $stmt = $bdd->prepare($sql);
-    $stmt->execute([':id_client' => $id]);
-    $ligne = $stmt->fetch();
-
-    $creation_co = $ligne['premiere_co'];
-
-    // Recherche des données pour le graphique
-    // Définir les catégories à afficher dans le radar
-    $categories = [
-        "Co-op" => "Co-op",
-        "MMO" => "MMO",
-        "Multi-player" => "Multi-player",
-        "PvP" => "PvP",
-        "Single-player" => "Single-player",
-        "VR" => "VR"
-    ];
-
-    // Récupérer le nombre de likes par catégorie pour ce client
-    $data = [];
-    foreach($categories as $label => $keyword){
-        $sql = "
-            SELECT COUNT(DISTINCT l.id_jeu) AS nb_likes
-            FROM `like` l
-            JOIN a_category ac ON l.id_jeu = ac.id_jeu
-            JOIN category c ON ac.id_cat = c.id_cat
-            WHERE l.id_client = :id_client
-            AND c.nom_cat LIKE :keyword
-        ";
-        $stmt = $bdd->prepare($sql);
-        $stmt->execute([
-            ':id_client' => $id,
-            ':keyword'   => "%$keyword%"
-        ]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        $data[] = [
-            "categorie" => $label,
-            "likes"     => (int)$row['nb_likes']
-        ];
-    }
-?>
-
 <!DOCTYPE html>
 <html>
 
@@ -82,6 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/jquery.js"></script>
+    <script src="js/deconnecter.js"></script>
     <title>Profil</title>
 
 </head>
@@ -95,14 +19,7 @@
                             class="gameswipe"></a>
                 </div>
                 <div class="boutons_compte">
-                    <?php
-                    if (!isset($_SESSION['client']) || empty($_SESSION['client'])) {
-                        echo '<a href="inscription.php"><img src="logo/boutons/Nom=Inscrire, Etat=Normal.svg" alt="Inscrire" class="inscrire"></a>
-                    <a href="connexion.php"><img src="logo/boutons/Nom=Connecter, Etat=Normal.svg" alt="Connecter" class="connecter"></a>';
-                    } else {
-                        echo '<a href="deconnecter.php" id="deconnecter"><img src="logo/boutons/Nom=Déconnecter, Etat=Normal.svg" alt="Deconnecter" class="deconnecter"></a>';
-                    }
-                    ?>
+                    <a href="deconnecter.php" id="deconnecter"><img src="logo/boutons/Nom=Déconnecter, Etat=Normal.svg" alt="Deconnecter" class="deconnecter"></a>
                 </div>
             </div>
             <div class="right_group">
@@ -113,12 +30,92 @@
                     <a href="dislike.php"><img src="logo/boutons/Nom=Dislike, Etat=Normal.svg" alt="Dislike"
                             class="dislike"></a>
                 </div>
-                <div class="bouton_filtres">
-                    <a><img src="logo/boutons/Nom=Filtres, Etat=Normal.svg" alt="Filtres" class="filtres"></a>
-                </div>
             </div>
         </div>
     </header>
+
+    <?php
+        session_start();
+
+        if(!isset($_SESSION["client"])){
+            header("Location: connexion.php");
+            exit;
+        }
+
+        if(!isset($_SESSION['token'])) {
+            $_SESSION['token'] = bin2hex(random_bytes(32));
+        }
+        $token = $_SESSION['token'];
+
+        if(!isset($_SESSION["client"]["id"])){
+            echo '<h1>Erreur de connexion : Veuillez vous reconnecter</h1>';
+            exit;
+        }
+        
+        $id = $_SESSION["client"]["id"];
+        $nom = $_SESSION["client"]["nom"];
+
+        require 'fonctions.php';
+        $bdd = getBDD();
+
+        // Recherche des données standars
+        $sql = "SELECT (SELECT COUNT(*) FROM `like` WHERE id_client = :id_client) AS nbr_like,
+            (SELECT COUNT(*) FROM dislike WHERE id_client = :id_client) AS nbr_dislike,
+            (SELECT COUNT(*) FROM favori WHERE id_client = :id_client) AS nbr_favori,
+            (SELECT COUNT(*) FROM `like` WHERE id_client = :id_client) +
+            (SELECT COUNT(*) FROM dislike WHERE id_client = :id_client) +
+            (SELECT COUNT(*) FROM favori WHERE id_client = :id_client) AS total_swipe;";
+        $stmt = $bdd->prepare($sql);
+        $stmt->execute([':id_client' => $id]);
+        $ligne = $stmt->fetch();
+
+        $like = $ligne['nbr_like'];
+        $dislike = $ligne['nbr_dislike'];
+        $favori = $ligne['nbr_favori'];
+        $total = $ligne['total_swipe'];
+
+        $sql = "SELECT * FROM client WHERE id_client = :id_client;";
+        $stmt = $bdd->prepare($sql);
+        $stmt->execute([':id_client' => $id]);
+        $ligne = $stmt->fetch();
+
+        $creation_co = $ligne['premiere_co'];
+
+        // Recherche des données pour le graphique
+        // Définir les catégories à afficher dans le radar
+        $categories = [
+            "Co-op" => "Co-op",
+            "MMO" => "MMO",
+            "Multi-player" => "Multi-player",
+            "PvP" => "PvP",
+            "Single-player" => "Single-player",
+            "VR" => "VR"
+        ];
+
+        // Récupérer le nombre de likes par catégorie pour ce client
+        $data = [];
+        foreach($categories as $label => $keyword){
+            $sql = "
+                SELECT COUNT(DISTINCT l.id_jeu) AS nb_likes
+                FROM `like` l
+                JOIN a_category ac ON l.id_jeu = ac.id_jeu
+                JOIN category c ON ac.id_cat = c.id_cat
+                WHERE l.id_client = :id_client
+                AND c.nom_cat LIKE :keyword
+            ";
+            $stmt = $bdd->prepare($sql);
+            $stmt->execute([
+                ':id_client' => $id,
+                ':keyword'   => "%$keyword%"
+            ]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $data[] = [
+                "categorie" => $label,
+                "likes"     => (int)$row['nb_likes']
+            ];
+        }
+    ?>
+
 
     <?php include 'burger.php'; ?>
 
