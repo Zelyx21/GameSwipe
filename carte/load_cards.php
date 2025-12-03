@@ -46,6 +46,8 @@ try {
         if ($cats['multi'] == 1) $catFilters = array_merge($catFilters, [15,11,17,19,26,4]);
         if ($cats['mmo'] == 1) $catFilters[] = 12;
         if ($cats['vr'] == 1) $catFilters = array_merge($catFilters, [35,37,38,39,36]);
+        
+        $catFilters = array_filter($catFilters, fn($v) => $v !== null && $v !== '');
 
         if (!empty($catFilters)) {
             $placeholders = implode(",", array_fill(0, count($catFilters), "?"));
@@ -70,18 +72,18 @@ try {
 
     // final requete sql
     $sql = "
-        SELECT DISTINCT j.*, c.nom_cat, t.nom_tag
+        SELECT j.*, c.nom_cat, t.nom_tag
         FROM jeux_videos j
         LEFT JOIN a_category ac ON j.id_jeu = ac.id_jeu
         LEFT JOIN category c ON ac.id_cat = c.id_cat
         LEFT JOIN a_tag at ON j.id_jeu = at.id_jeu
         LEFT JOIN tag t ON at.id_tag = t.id_tag
-        GROUP BY j.id_jeu
     ";
 
     if (!empty($conditions)) {
         $sql .= " WHERE " . implode(" AND ", $conditions);
     }
+    $sql .= " GROUP BY j.id_jeu";
 
     $stmt = $bdd->prepare($sql);
     $stmt->execute($params);
