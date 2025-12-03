@@ -10,15 +10,15 @@ try {
     // Get user quiz answers
     $q0 = $bdd->prepare("SELECT * FROM quest0 WHERE id_client = ?");
     $q0->execute([$id_client]);
-    $age = $q0->fetch(PDO::FETCH_ASSOC);
+    $age = $q0->fetch();
 
     $q1 = $bdd->prepare("SELECT * FROM quest1 WHERE id_client = ?");
     $q1->execute([$id_client]);
-    $cats = $q1->fetch(PDO::FETCH_ASSOC);
+    $cats = $q1->fetch();
 
     $q2 = $bdd->prepare("SELECT * FROM quest2 WHERE id_client = ?");
     $q2->execute([$id_client]);
-    $times = $q2->fetch(PDO::FETCH_ASSOC);
+    $times = $q2->fetch();
 
     $conditions = [];
     $params = [];
@@ -70,9 +70,13 @@ try {
 
     // final requete sql
     $sql = "
-        SELECT DISTINCT j.id_jeu, j.nom_jeu, j.image, j.description, j.release_date
+        SELECT DISTINCT j.*, c.nom_cat, t.nom_tag
         FROM jeux_videos j
         LEFT JOIN a_category ac ON j.id_jeu = ac.id_jeu
+        LEFT JOIN category c ON ac.id_cat = c.id_cat
+        LEFT JOIN a_tag at ON j.id_jeu = at.id_jeu
+        LEFT JOIN tag t ON at.id_tag = t.id_tag
+        GROUP BY j.id_jeu
     ";
 
     if (!empty($conditions)) {

@@ -32,11 +32,12 @@ function createCard(game) {
                     <img src="${game.image}" alt="${game.nom_jeu}">
                 </div>
                 <div class="card-middle">
-                    <p>${game.release_date}</p>
+                    <p> Prix : ${game.price}$ <br>
+                    Catégorie : ${game.nom_cat}</p>
                 </div>
                 <button class="star-button">★</button>
                 <div class="card-bottom">
-                    <span>#RPG</span>
+                    <span>#${game.nom_tag}</span>
                 </div>
             </div>
             <div class="card card-back">
@@ -68,30 +69,28 @@ function createCard(game) {
         }, 400);
     });
 
-    cardStack.appendChild(card);
+    cardStack.insertBefore(card, cardStack.firstChild); // ← ici
     enableSwipe(card);
     enableFlip(card.querySelector(".flip-card-inner"));
     stackAdjust();
 }
 
-// Ajustement pile
 function stackAdjust() {
-    const cards = Array.from(cardStack.querySelectorAll(".flip-card"));
-    const topIndex = cards.length - 1;
-    const secondIndex = cards.length - 2;
+    const cards = Array.from(cardStack.querySelectorAll(".flip-card"))
+        .filter(c => c.dataset.removing !== "true"); // ignore cartes en suppression
 
     cards.forEach((card, i) => {
-        if (card.dataset.removing === "true") return; // ignore la carte en suppression
+        const idxFromTop = cards.length - 1 - i;
 
-        if (i === topIndex) {
+        if (idxFromTop === 0) { // carte du dessus
             card.style.display = "block";
             card.style.zIndex = 10;
-            card.style.transform = "translate(0,0)";
-        } else if (i === secondIndex) {
+            card.style.transform = "translate(0,0) scale(1)";
+        } else if (idxFromTop === 1) { // carte derrière
             card.style.display = "block";
             card.style.zIndex = 5;
             card.style.transform = "translate(0,0) scale(0.98)";
-        } else {
+        } else { // toutes les autres
             card.style.display = "none";
         }
     });
