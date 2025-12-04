@@ -1,6 +1,0 @@
-<?php
-session_start();
-unset($_SESSION['client']);
-session_destroy();
-echo "1";
-?>

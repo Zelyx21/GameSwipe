@@ -28,8 +28,52 @@ a {
     text-decoration: none;
 }
 
+/* ----------------------------------------------------------
 
-/* Barre du haut */
+/* ===== Burger bar ===== */
+.burger_bar {
+    position: relative; /* parent du menu */
+    z-index: 1000000 !important;
+}
+
+.burger_menu {
+    display: none;
+    flex-direction: column;
+    background-color: #3C2C59;
+    position: fixed;
+    top: 25%;
+    left: 0;
+    width: 200px;
+    padding: 1em;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    margin-top: 2em;
+    margin-left: 2em;
+    z-index: 1000000 !important;
+}
+
+.burger_menu a {
+    color: #8874DF;
+    text-decoration: none;
+    padding: 0.5em 0;
+    font-family: 'Kanit', sans-serif;
+    font-size: 1.2em;
+    text-align: center;
+    font: Kannitu,sans-serif;
+}
+
+.burger_menu a:hover {
+    color: #fff;
+}
+
+.burger_menu.active {
+    display: flex;
+    z-index: 1000000 !important;
+}
+/* ===== Fin burger bar ===== */
+
+/* ----------------------------------------------------------
+
+/* ===== Barre du haut ===== */
 
 .gameswipe:hover img {
     content: url('../logo/boutons/Nom=GameSwipe\,\ Etat=Souris.svg');
@@ -131,6 +175,7 @@ a {
 
 body.burger-bg .burger_bar {
     background-color: #3C2C59;
+    text-align: center;
 }
 
 .burger {
@@ -145,9 +190,11 @@ body.burger-bg .burger_bar {
     margin-left: 3em;
     margin-bottom: 1.5em;
 }
+/* ===== Fin barre du haut ===== */
 
+/* ----------------------------------------------------------
 
-/* inscription et connexion */
+/* ===== Inscription et connexion ===== */
 
 .inscription_bloc {
     display: flex;
@@ -229,8 +276,11 @@ body.burger-bg .burger_bar {
 .btn_secondaire:hover {
     background-color: #957ed7;
 }
+/* ===== Fin inscription et connexion ===== */
 
-/* bottom_bar */
+/* ----------------------------------------------------------
+
+/* ===== Barre du bas ===== */
 .bottom_bar {
     position: fixed;
     background-color: #493C60;
@@ -259,6 +309,8 @@ body.burger-bg .burger_bar {
     height: 100%;
     top: 0;
     left: 0;
+    z-index: 50; /* on voit les cartes swiper au dessus du fond */
+
 }
 
 
@@ -299,6 +351,14 @@ body.burger-bg .burger_bar {
     transform: rotateY(180deg);
 }
 
+.card-back p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2em;          /* hauteur d’une ligne */
+    max-height: calc(1.2em * 35); /* limite à 12 lignes */
+    padding: 10px;
+}
+
 /* ===== CARD CONTENT ===== */
 .card-top {
     display: flex;
@@ -327,23 +387,26 @@ body.burger-bg .burger_bar {
 
 /* ===== STAR BUTTON ===== */
 .star-button {
-    position: absolute;
-    top: -5%;
-    right: -5%;
-    width: 10%;
-    height: 10%;
+   position: absolute;  
+    top: 10px;
+    right: 10px;
+    z-index: 20; 
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background-color: #f8f8e0;
+    background-color: #fff;
     color: #9e00ff;
     border: none;
     cursor: pointer;
-    font-size: 2vw;
+    font-size: 1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     transition: transform 0.2s;
+    transform: translate(50%, -50%) scale(1.3);
 }
+
 
 .star-button:hover {
     transform: scale(1.3);
