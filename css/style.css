@@ -28,8 +28,52 @@ a {
     text-decoration: none;
 }
 
+/* ----------------------------------------------------------
 
-/* Barre du haut */
+/* ===== Burger bar ===== */
+.burger_bar {
+    position: relative; /* parent du menu */
+    z-index: 1000000 !important;
+}
+
+.burger_menu {
+    display: none;
+    flex-direction: column;
+    background-color: #3C2C59;
+    position: fixed;
+    top: 25%;
+    left: 0;
+    width: 200px;
+    padding: 1em;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    margin-top: 2em;
+    margin-left: 2em;
+    z-index: 1000000 !important;
+}
+
+.burger_menu a {
+    color: #8874DF;
+    text-decoration: none;
+    padding: 0.5em 0;
+    font-family: 'Kanit', sans-serif;
+    font-size: 1.2em;
+    text-align: center;
+    font: Kannitu,sans-serif;
+}
+
+.burger_menu a:hover {
+    color: #fff;
+}
+
+.burger_menu.active {
+    display: flex;
+    z-index: 1000000 !important;
+}
+/* ===== Fin burger bar ===== */
+
+/* ----------------------------------------------------------
+
+/* ===== Barre du haut ===== */
 
 .gameswipe:hover img {
     content: url('../logo/boutons/Nom=GameSwipe\,\ Etat=Souris.svg');
@@ -131,6 +175,7 @@ a {
 
 body.burger-bg .burger_bar {
     background-color: #3C2C59;
+    text-align: center;
 }
 
 .burger {
@@ -145,9 +190,11 @@ body.burger-bg .burger_bar {
     margin-left: 3em;
     margin-bottom: 1.5em;
 }
+/* ===== Fin barre du haut ===== */
 
+/* ----------------------------------------------------------
 
-/* inscription et connexion */
+/* ===== Inscription et connexion ===== */
 
 .inscription_bloc {
     display: flex;
@@ -229,8 +276,11 @@ body.burger-bg .burger_bar {
 .btn_secondaire:hover {
     background-color: #957ed7;
 }
+/* ===== Fin inscription et connexion ===== */
 
-/* bottom_bar */
+/* ----------------------------------------------------------
+
+/* ===== Barre du bas ===== */
 .bottom_bar {
     position: fixed;
     background-color: #493C60;
@@ -238,6 +288,7 @@ body.burger-bg .burger_bar {
     width: 100%;
     height: 10%;
 }
+/* ===== Fin barre du bas ===== */
 
 /* ===== CARD CONTAINER ===== */
 .card-container {
@@ -248,8 +299,7 @@ body.burger-bg .burger_bar {
     /* hauteur fixe pour la pile */
     margin: 20px auto;
     perspective: 1000px;
-    overflow: hidden;
-    /* les cartes derrière ne font pas grandir la page */
+    overflow: visible ; /* permet d evoir les cartes glisser */
 }
 
 .flip-card {
@@ -259,6 +309,8 @@ body.burger-bg .burger_bar {
     height: 100%;
     top: 0;
     left: 0;
+    z-index: 50; /* on voit les cartes swiper au dessus du fond */
+
 }
 
 
@@ -292,11 +344,20 @@ body.burger-bg .burger_bar {
     background: linear-gradient(135deg, #6a00f4, #9e00ff);
     color: white;
     padding: 2%;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    overflow: hidden;
 }
 
 .card-back {
     transform: rotateY(180deg);
+}
+
+.card-back p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2em;          /* hauteur d’une ligne */
+    max-height: calc(1.2em * 35); /* limite à 12 lignes */
+    padding: 10px;
 }
 
 /* ===== CARD CONTENT ===== */
@@ -327,27 +388,29 @@ body.burger-bg .burger_bar {
 
 /* ===== STAR BUTTON ===== */
 .star-button {
-    position: absolute;
-    top: -5%;
-    right: -5%;
-    width: 10%;
-    height: 10%;
+   position: absolute;  
+    top: 10px;
+    right: 10px;
+    z-index: 20; 
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background-color: #f8f8e0;
+    background-color: #fff;
     color: #9e00ff;
     border: none;
     cursor: pointer;
-    font-size: 2vw;
+    font-size: 1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     transition: transform 0.2s;
+    transform: translate(50%, -50%) scale(1.3);
 }
 
+
 .star-button:hover {
-    transform: scale(1.3);
-    box-shadow: 0 1% 3% rgba(0, 0, 0, 0.4);
+    box-shadow: 0 1% 3% rgba(0,0,0,0.4);
 }
 
 /*questionnaire*/
@@ -424,117 +487,488 @@ body.burger-bg .burger_bar {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+/* ----------------------------------------------------------
 
+/* ===== Page profil ===== */
+.body_profil {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;      /* s'assure que le body prend tout l'écran */
+}
 
-/*FILTRES*/
+/* Profil image et premier div */
+h3 {
+    color: #fff;
+}
 
-#overlay_filtres {
+.profile-header {
+    background-color: #1b1b3a;
+    text-align: center;
+    padding: 3em 1em 1em 1em;
+}
+
+.profile-header h1 {
+    margin: 0;
+    font-size: 2em;
+    color: #9d87e8;
+    margin-bottom: 0;
+}
+
+.profile-avatar {
+    margin-top: 0;
+    position: relative;
+    display: inline-block;
+    margin-top: -6em;
+}
+
+.profile-avatar img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+}
+
+.profile-avatar .camera-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #fff;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.profile-avatar .camera-icon img {
+    width: 30px;
+    height: 30px;
+    display: block;
+}
+
+.profile-welcome {
+    margin-top: 0.5em;
+    font-size: 1.2em;
+}
+
+/* div des modifs */
+.profile-modif {
+    display: flex;
+    flex-direction: row;
+    flex: 1;                    /* prend tout l’espace restant sous le header */
+    background-color: #CFBFEE;
+    display: flex;
+    gap: 2%;
+    width: 100%;
+    box-sizing: border-box;     /* inclut padding et bordures dans la largeur */
+}
+
+.profile-modif .column {
+    flex: 1;        /* chaque colonne prend la même largeur */
+    min-width: 0;   /* pour éviter le débordement des contenus */
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2%;
+    margin-left: 5%;
+    margin-right: 5%;
+    gap: 2%;
+}
+
+.profile-modif .column:nth-child(2) {
+    gap: 6%;
+}
+
+.profile-modif input {
+    padding: 1em;
+    font-size: 1em;
+    border-radius: 10px;
+    border: none;
+    margin-right: 1em;
+    width: 30em;
+}
+
+.bouton-input-modif {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+label {
+    color: #101010;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+.btn-red {
+    padding: 12px 28px;
+    background-color: #c72424ff;
+    border: none;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 2%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: 0.2s;
+}
+
+.btn-red:hover {
+    background-color: #e58787ff;
+}
+/* ===== Fin page profil ===== */
+
+/* ----------------------------------------------------------
+
+/* ===== Page contact ===== */
+body.burger-bg .header-container {
+    display: flex;
+    position: relative;
+    align-items: center;
+    background-color: #3C2C59;
+    left: 0;
+}
+
+body.burger-bg .titre_haut {
+    position: fixed;
+    color: #C9BFF3;
+    font-size: 2.5em;
+    letter-spacing: 1px;
+    margin: 0 auto;
+    left: 50%;
+}
+
+.text_contact {
+    margin-left: 7.5em;
+    margin-right: 7.5em;
+    font-size: 1.8em;
+    line-height: 1.6;
+    color: #8874DF;
+    margin-top: 0.5em;
+    text-indent: 2em;
+}
+
+.text_contact.intro {
+    display: block;
+    text-align: center;
+}
+/* ===== Fin page contact ===== */
+
+/* ----------------------------------------------------------
+
+/* ===== Page statistiques ===== */
+
+.titre_haut{
+    margin-top: -5%;
+    color: #C9BFF3;
+    text-align: center;
+    font-size: 2.5em;
+    letter-spacing: 1px;
+    margin-bottom: 35px;
+}
+
+.container {
+    width: 75%;
+    margin: 50px auto 0 auto;
+    display: flex;
+    flex-direction: row;
+    gap: 15%;
+    box-sizing: border-box;
+}
+
+.gauche {
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+    vertical-align: top;
+    flex: 1;        /* chaque colonne prend la même largeur */
+    min-width: 0;
+    font-weight: bold;
+}
+
+.stats {
+    background: #C9BFF3;
+    border-radius: 16px;
+    padding: 1% 4%;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.3em;
+    min-height: 50%;
+    padding-bottom: 7%;
+}
+
+.stat-row {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+}
+
+.stat-label {
+    display: flex;               /* image et texte sur la même ligne */
+    align-items: center;
+    flex: 1;
+}
+
+.stat-value {
+    background: #956BD5;
+    border: 2px solid #5B328A;
+    color: #000;
+    padding: 4px 15px;
+    margin-left: 14px;
+    border-radius: 16px;
+    font-size: 1.11em;
+    min-width: 6%;
+    max-width: 6%;
+    text-align: center;
+}
+
+.last-conn {
+    background: #C9BFF3;
+    border-radius: 16px;
+    font-size: 1.2em;
+    min-height: 20%;
+    justify-content: center;   /* Centre verticalement si tu mets une hauteur */
+    line-height: 2;            /* Espace entre les lignes */
+    text-align: center;
+    font-weight: bold;
+}
+
+.droite {
+    background: #C9BFF3;
+    border-radius: 16px;
+    padding: 18px 25px;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    flex: 1;        /* chaque colonne prend la même largeur */
+    min-height: 22em;
+    min-width: 24em;
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.droite-clock {
+    position: absolute;
+    right: 18px;
+    top: 16px;
+    font-size: 1.7em;
+}
+
+.droite canvas {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* wrapper carré qui garde un ratio 1:1 */
+.radar-wrap {
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    /* Le pseudo-élément crée l'espace (height) égal à la largeur -> carré */
+}
+
+.radar-wrap::before {
+    content: "";
+    display: block;
+    padding-top: 100%; /* 100% == carré */
+}
+
+/* canvas placé absolument pour remplir le wrapper carré */
+.radar-wrap canvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+/* ===== Fin page statistiques ===== */
+
+/* ----------------------------------------------------------
+
+/* =====  ===== */
+/* ===== Pages Like, Dislike, Favorite =====*/
+/* ===== Pages Like, Dislike, Favorite ===== */
+
+/* Container de la bibliothèque */
+.library-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* largeur fixe avec flexibilité */
+    gap: 30px; /* espace entre les cartes */
+    padding: 20px;
+    justify-items: center; /* centre les cartes dans chaque colonne */
+}
+
+/* Carte */
+
+.library-card {
+    width: 300px;  /* largeur fixe */
+    height: 400px; /* hauteur fixe */
+    background-color: #493C60;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.library-card:hover {
+    transform: translateY(-5px);
+}
+
+.library-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.library-card h3 {
+    margin: 10px 0 5px 0;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+/* Description */
+.library-card p {
+    font-size: 0.95em;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;  /* limite à 6 lignes */
+    -webkit-box-orient: vertical;
+    height: calc(1.2em * 6); /* hauteur fixe de la description */
+    line-height: 1.2em;
+}
+
+/* ===== Popup des cartes ===== */
+#popup-card.popup-hidden {
+    display: none;
+}
+
+#popup-card {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(28, 17, 58, 0.54);
-    opacity: 0;
-    pointer-events: none;
-    /*ne bloque pas les clics*/
-    transition: 0.3s;
-    z-index: 900;
-    /*met l'overlay au dessus du site mais sous la barre des filtres*/
-}
-
-#overlay_filtres.active {
-    opacity: 1;
-    pointer-events: auto;
-    /*bloque les clics*/
-}
-
-#sidebar_filtres {
-    position: fixed;
-    top: 0;
-    right: -410px;
-    /*en dehors de l'écran quand pas actif*/
-    width: 350px;
-    height: 100%;
-    /*prend la hauteur de l'écran*/
-    background: #2a1f3b;
-    border-left: 2px solid #7a52ff30;
-    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.5);
-    /*ombre à gauche*/
-    padding: 25px;
-    /*espace intérieur à gauche et droite*/
-    transition: 0.3s;
-    /*la sidebar glisse*/
-    z-index: 1000;
-    /*la barre est au dessus de tout dans le site*/
-    overflow-y: auto;
-    /*quand contenu trop long on peut scroll*/
-}
-
-#sidebar_filtres.active {
-    right: 0;
-    /*fait apparaître la barre*/
-}
-
-.titre_sidebar {
-    color: #d1c3ff;
-    font-size: 28px;
-    margin-bottom: 20px;
-}
-
-
-.filtre-header {
-    /*pour avoir le ptit bouton à droite*/
+    z-index: 999999;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+}
+
+.popup-overlay {
+    position: absolute;
     width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px); /* floute le fond */
+    background: transparent;     /* plus de noir */
 }
 
-.bloc_filtre {
-    background: #5a4180;
-    margin-bottom: 12px;
-    padding: 15px;
-    border-radius: 10px;
-    color: #e2d6ff;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background 0.3s;
+/* Carte popup */
+.popup-flip-card {
+    width: 300px;  /* largeur fixe identique à accueil */
+    height: 400px; /* hauteur fixe identique à accueil */
+    perspective: 1000px;
+    position: relative;
+    z-index: 10;
 }
 
-.bloc_filtre.open {
-    background: #7b5da3;
-    /* couleur quand ouvert */
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
 }
 
-.filtre-header {
+.flip-card-inner.flipped {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    backface-visibility: hidden;
+    overflow: hidden;
+    background-color: #493C60;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    font-weight: bold;
 }
 
-.arrow {
-    transition: transform 0.3s;
+.card-front img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
 
-.bloc_filtre.open .arrow {
-    transform: rotate(180deg);
+.card-front h2 {
+    font-size: 1.5em;
+    text-align: center;
 }
 
-.filtre-options {
-    display: none;
-    margin-top: 10px;
-    padding-left: 10px;
+.card-back {
+    transform: rotateY(180deg);
+    padding: 20px;
 }
 
-.bloc_filtre.open .filtre-options {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+.card-back p {
+    text-align: center;
+    overflow-y: auto;
 }
 
-.filtre-options label {
-    display: block;
-    margin-bottom: 5px;
+#popup-card .star-button {
+    position: absolute;  /* position relative à la carte popup */
+    top: 10px;
+    right: 10px;
+    z-index: 20; /* plus grand que la carte et le flou */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #9e00ff;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    transition: transform 0.2s;
 }
+
+#popup-card .star-button:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+
+
+/* close button */
+#popup-close {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    background: #fff;
+    border-radius: 50%;
+    padding: 10px 13px;
+    font-size: 1.2rem;
+    cursor: pointer
+}
+
+/* ====== FIN des pages Like, Dislike, et favorite ===== */

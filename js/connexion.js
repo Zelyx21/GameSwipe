@@ -15,7 +15,7 @@ $(document).ready(function () {
                 if (response == "1") {
                     $("#message_form").text("Connexion réussie !").css("color", "green");
                     setTimeout(function () {
-                        window.location.href = "accueil.php";
+                        window.location.href = "../accueil.php";
                     }, 1000);
                 }
                 else if (response == "0") {
@@ -24,7 +24,7 @@ $(document).ready(function () {
                 else {
                     $("#message_form").text(response).css("color", "red");
                     setTimeout(function () {
-                        window.location.href = "accueil.php";
+                        window.location.href = "../accueil.php";
                     }, 1000);
                 }
             },
